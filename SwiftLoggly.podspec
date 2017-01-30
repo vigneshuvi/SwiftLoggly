@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftLoggly"
-  s.version      = "1.0.0"
+  s.version      = "0.5.0"
   s.summary      = "Simple way to logging with rich feature framework in Swift."
 
   # This description is used to generate tags and improve search results.
