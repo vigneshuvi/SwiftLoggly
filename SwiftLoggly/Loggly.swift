@@ -129,8 +129,8 @@ open class Loggly {
             path = "\(paths[0])/Logs"
         #elseif os(OSX)
             let urls = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)
-            if urls.count > 0 {
-                path = "\(urls.last.path)/Logs"
+            if let url = urls.last?.path {
+                path = "\(url)/Logs"
             }
         #endif
         if !fileManager.fileExists(atPath: path) && path != ""  {
