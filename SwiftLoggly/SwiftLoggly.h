@@ -2,7 +2,7 @@
 //  SwiftLoggly.h
 //  SwiftLoggly
 //
-//  Created by qbuser on 30/01/17.
+//  Created by Vignesh on 30/01/17.
 //  Copyright © 2017 vigneshuvi. All rights reserved.
 //
 
