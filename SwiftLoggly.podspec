@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftLoggly"
-  s.version      = "0.5.2"
+  s.version      = "0.5.3"
   s.summary      = "Simple way to logging with rich feature framework in Swift."
 
   # This description is used to generate tags and improve search results.
@@ -132,7 +132,5 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
-  
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
 
 end
