@@ -18,19 +18,19 @@ extension String {
 open class Loggly {
 
     ///The max size a log file can be in Kilobytes. Default is 1024 (1 MB)
-    open var maxFileSize: UInt64 = 1024
+    open var maxFileSize: UInt64 = 1024;
     
     ///The max number of log file that will be stored. Once this point is reached, the oldest file is deleted.
-    open var maxFileCount = 4
+    open var maxFileCount = 4;
     
     ///The directory in which the log files will be written
-    open var directory = Loggly.defaultDirectory()
+    open var directory = Loggly.defaultDirectory();
     
     //The name of the log files.
-    open var name = "logfile"
+    open var name = "logfile";
     
     //The date format of the log time.
-    open var logDateFormat = ""
+    open var logDateFormat = "";
     
     ///logging singleton
     open class var logger: Loggly {
