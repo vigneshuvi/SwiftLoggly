@@ -15,6 +15,39 @@ extension String {
     }
 }
 
+extension Dictionary {
+    var jsonString: String {
+        let invalidJson = "Not a valid JSON"
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
+        } catch {
+            return invalidJson
+        }
+    }
+    
+    func printJson() {
+        print(jsonString)
+    }
+}
+
+
+extension NSDictionary {
+    var jsonString: String {
+        let invalidJson = "Not a valid JSON"
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
+        } catch {
+            return invalidJson
+        }
+    }
+    
+    func printJson() {
+        print(jsonString)
+    }
+}
+
 open class Loggly {
 
     ///The max size a log file can be in Kilobytes. Default is 1024 (1 MB)
@@ -147,4 +180,14 @@ open class Loggly {
 ///a free function to make writing to the log much nicer
 public func loggly(_ text: String) {
     Loggly.logger.write(text)
+}
+
+///a free function to make writing to the log much nicer
+public func loggly(_ dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(dictionary.jsonString)
+}
+
+///a free function to make writing to the log much nicer
+public func loggly(_ dictionary: NSDictionary) {
+    Loggly.logger.write(dictionary.jsonString)
 }
