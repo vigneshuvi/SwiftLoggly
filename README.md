@@ -84,5 +84,5 @@ SwiftLoggly is licensed under the MIT License.
 
 ## Contact
 
-### Dalton Cherry
+### Vignesh Kumar
 * http://vigneshuvi.github.io
