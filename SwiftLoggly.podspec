@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftLoggly"
-  s.version      = "0.5.0"
+  s.version      = "0.5.1"
   s.summary      = "Simple way to logging with rich feature framework in Swift."
 
   # This description is used to generate tags and improve search results.
@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files = '*.swift'
+   s.source_files  = "SwiftLoggly", "SwiftLoggly/**/*.{h,m,swift}"
   #s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
