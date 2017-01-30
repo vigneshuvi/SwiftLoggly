@@ -60,7 +60,7 @@ open class Loggly {
     open var directory = Loggly.defaultDirectory();
     
     //The name of the log files.
-    open var name = "logfile";
+    open var name = "logglyfile";
     
     //The date format of the log time.
     open var logDateFormat = "";
