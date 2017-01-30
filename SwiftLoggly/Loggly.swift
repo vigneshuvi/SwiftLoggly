@@ -147,6 +147,6 @@ open class Loggly {
 }
 
 ///a free function to make writing to the log much nicer
-public func logw(_ text: String) {
+public func loggly(_ text: String) {
     Loggly.logger.write(text)
 }
