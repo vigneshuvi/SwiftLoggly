@@ -48,6 +48,34 @@ extension NSDictionary {
     }
 }
 
+// Struct for Color Log
+struct ColorLog {
+    static let ESCAPE = "\u{001b}["
+    
+    static let RESET_FG = ESCAPE + "fg;" // Clear any foreground color
+    static let RESET_BG = ESCAPE + "bg;" // Clear any background color
+    static let RESET = ESCAPE + ";"   // Clear any foreground or background color
+    
+    static func red<T>(object: T) {
+        print("\(ESCAPE)fg255,0,0;\(object)\(RESET)", terminator: "")
+    }
+    
+    static func green<T>(object: T) {
+        print("\(ESCAPE)fg0,255,0;\(object)\(RESET)", terminator: "")
+    }
+    
+    static func blue<T>(object: T) {
+        print("\(ESCAPE)fg0,0,255;\(object)\(RESET)", terminator: "")
+    }
+}
+
+// Public Enumaration for log type
+public enum LogType {
+    case LogInfo
+    case LogError
+    case LogWarn
+}
+
 open class Loggly {
 
     ///The max size a log file can be in Kilobytes. Default is 1024 (1 MB)
@@ -86,8 +114,34 @@ open class Loggly {
         return formatter
     }
     
+    ///gets the log type with String
+    func logTypeName(_ type: LogType) -> String {
+        var logTypeStr = "";
+        switch type {
+        case .LogInfo:
+           logTypeStr = "Info - "
+        case .LogWarn:
+             logTypeStr = "Warn - "
+        case .LogError:
+             logTypeStr = "Error - "
+        }
+        return logTypeStr;
+    }
+    
+    /// Prints the log type with String and type color code.
+    func printLog(_ type: LogType, text:String) {
+        switch type {
+        case .LogInfo:
+            ColorLog.blue(object: text)
+        case .LogWarn:
+            ColorLog.blue(object: text)
+        case .LogError:
+            ColorLog.red(object: text)
+        }
+    }
+    
     ///write content to the current log file.
-    open func write(_ text: String) {
+    open func write(_ type: LogType, text: String) {
         let path = "\(directory)/\(logName(0))"
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: path) {
@@ -98,11 +152,11 @@ open class Loggly {
         }
         if let fileHandle = FileHandle(forWritingAtPath: path) {
             let dateStr = dateFormatter.string(from: Date())
-            let writeText = "[\(dateStr)]: \(text)\n"
+            let writeText = "[\(logTypeName(type)) \(dateStr)]: \(text)\n"
             fileHandle.seekToEndOfFile()
             fileHandle.write(writeText.data(using: String.Encoding.utf8)!)
             fileHandle.closeFile()
-            print(writeText, terminator: "")
+            printLog(type, text: text)
             cleanup()
         }
     }
@@ -177,17 +231,17 @@ open class Loggly {
     
 }
 
-///a free function to make writing to the log much nicer
-public func loggly(_ text: String) {
-    Loggly.logger.write(text)
+///a free function to make writing to the log with Log type
+public func loggly(_ type: LogType, text: String) {
+    Loggly.logger.write(type, text: text)
 }
 
-///a free function to make writing to the log much nicer
-public func loggly(_ dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(dictionary.jsonString)
+///a free function to make writing to the log with Log type
+public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(type, text: dictionary.jsonString)
 }
 
-///a free function to make writing to the log much nicer
-public func loggly(_ dictionary: NSDictionary) {
-    Loggly.logger.write(dictionary.jsonString)
+///a free function to make writing to the log with Log type
+public func loggly(_ type: LogType, dictionary: NSDictionary) {
+    Loggly.logger.write(type, text: dictionary.jsonString)
 }
