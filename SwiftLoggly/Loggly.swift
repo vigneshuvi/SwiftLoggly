@@ -9,12 +9,14 @@
 import Foundation
 
 
+//MARK: -  Extension for String to find length
 extension String {
     var length: Int {
         return self.characters.count
     }
 }
 
+//MARK: -  Extension for convert Dictionary to String
 extension Dictionary {
     var jsonString: String {
         let invalidJson = "Not a valid JSON"
@@ -32,6 +34,7 @@ extension Dictionary {
 }
 
 
+//MARK: -  Extension for convert NSDictionary to String
 extension NSDictionary {
     var jsonString: String {
         let invalidJson = "Not a valid JSON"
@@ -48,7 +51,7 @@ extension NSDictionary {
     }
 }
 
-// Struct for Color Log
+//MARK: -  Struct for Color Log
 struct ColorLog {
     static let ESCAPE = "\u{001b}["
     
@@ -57,25 +60,37 @@ struct ColorLog {
     static let RESET = ESCAPE + ";"   // Clear any foreground or background color
     
     static func red<T>(object: T) {
-        print("\(ESCAPE)fg255,0,0;\(object)\(RESET)", terminator: "")
+        print("\(ESCAPE)fg255,0,0;\(object)\(RESET)")
     }
     
     static func green<T>(object: T) {
-        print("\(ESCAPE)fg0,255,0;\(object)\(RESET)", terminator: "")
+        print("\(ESCAPE)fg0,255,0;\(object)\(RESET)")
     }
     
     static func blue<T>(object: T) {
-        print("\(ESCAPE)fg0,0,255;\(object)\(RESET)", terminator: "")
+        print("\(ESCAPE)fg0,0,255;\(object)\(RESET)")
     }
+    
+    static func yellow<T>(object: T) {
+        print("\(ESCAPE)fg255,255,0;\(object)\(RESET)")
+    }
+    
+    static func purple<T>(object: T) {
+        print("\(ESCAPE)fg255,0,255;\(object)\(RESET)")
+    }
+
 }
 
-// Public Enumaration for log type
+//MARK: -  Enumaration for log type
 public enum LogType {
-    case LogInfo
-    case LogError
-    case LogWarn
+    case Info
+    case Verbose
+    case Warnings
+    case Debug
+    case Error
 }
 
+//MARK: -  Loggly Class
 open class Loggly {
 
     ///The max size a log file can be in Kilobytes. Default is 1024 (1 MB)
@@ -106,7 +121,7 @@ open class Loggly {
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         if !logDateFormat.isEmpty && logDateFormat.length > 0 {
-            formatter.dateFormat = "MMMM dd yyyy"
+            formatter.dateFormat = logDateFormat
         } else {
             formatter.timeStyle = .medium
             formatter.dateStyle = .medium
@@ -115,27 +130,38 @@ open class Loggly {
     }
     
     ///gets the log type with String
+    // use colored Emojis for better visual distinction
+    // of log level for Xcode 8
     func logTypeName(_ type: LogType) -> String {
         var logTypeStr = "";
         switch type {
-        case .LogInfo:
-           logTypeStr = "Info - "
-        case .LogWarn:
-             logTypeStr = "Warn - "
-        case .LogError:
-             logTypeStr = "Error - "
+        case .Info:
+           logTypeStr = "💙 Info - "
+        case .Verbose:
+             logTypeStr = "💜 Warn - "
+        case .Warnings:
+             logTypeStr = "💛 Error - "
+        case .Debug:
+            logTypeStr = "💚 Error - "
+        case .Error:
+            logTypeStr = "❤️ Error - "
         }
+        
         return logTypeStr;
     }
     
     /// Prints the log type with String and type color code.
     func printLog(_ type: LogType, text:String) {
         switch type {
-        case .LogInfo:
+        case .Info:
             ColorLog.blue(object: text)
-        case .LogWarn:
-            ColorLog.blue(object: text)
-        case .LogError:
+        case .Verbose:
+            ColorLog.purple(object: text)
+        case .Warnings:
+            ColorLog.yellow(object: text)
+        case .Debug:
+            ColorLog.green(object: text)
+        case .Error:
             ColorLog.red(object: text)
         }
     }
@@ -156,7 +182,7 @@ open class Loggly {
             fileHandle.seekToEndOfFile()
             fileHandle.write(writeText.data(using: String.Encoding.utf8)!)
             fileHandle.closeFile()
-            printLog(type, text: text)
+            print(writeText, terminator: "")
             cleanup()
         }
     }
@@ -230,6 +256,88 @@ open class Loggly {
     }
     
 }
+
+//MARK: -  Loggly Info Methods
+///a free function to make writing to the log
+public func logglyInfo(text: String) {
+    Loggly.logger.write(LogType.Info, text: text)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyInfo(_ dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(LogType.Info, text: dictionary.jsonString)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyInfo(_  dictionary: NSDictionary) {
+    Loggly.logger.write(LogType.Info, text: dictionary.jsonString)
+}
+
+//MARK: -  Loggly Warning Methods
+///a free function to make writing to the log
+public func logglyWarnings(text: String) {
+    Loggly.logger.write(LogType.Warnings, text: text)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyWarnings(_ dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(LogType.Warnings, text: dictionary.jsonString)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyWarnings(_  dictionary: NSDictionary) {
+    Loggly.logger.write(LogType.Warnings, text: dictionary.jsonString)
+}
+
+//MARK: -  Loggly Verbose Methods
+///a free function to make writing to the log
+public func logglyVerbose(text: String) {
+    Loggly.logger.write(LogType.Debug, text: text)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyVerbose(_ dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyVerbose(_  dictionary: NSDictionary) {
+    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
+}
+
+//MARK: -  Loggly Debug Methods
+///a free function to make writing to the log
+public func logglyDebug(text: String) {
+    Loggly.logger.write(LogType.Debug, text: text)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyDebug(_ dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyDebug(_  dictionary: NSDictionary) {
+    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
+}
+
+//MARK: -  Loggly Error Methods
+///a free function to make writing to the log
+public func logglyError(text: String) {
+    Loggly.logger.write(LogType.Error, text: text)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyError(_ dictionary: Dictionary<AnyHashable, Any>) {
+    Loggly.logger.write(LogType.Error, text: dictionary.jsonString)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyError(_  dictionary: NSDictionary) {
+    Loggly.logger.write(LogType.Error, text: dictionary.jsonString)
+}
+
+//MARK: -  Loggly Methods with Log type
 
 ///a free function to make writing to the log with Log type
 public func loggly(_ type: LogType, text: String) {

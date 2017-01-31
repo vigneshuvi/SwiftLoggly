@@ -15,6 +15,13 @@ import SwiftLoggly
 import SwiftLogglyOSX
 
 ```
+enum LogType {
+    case Info
+    case Verbose
+    case Warnings
+    case Debug
+    case Error
+}
 
 ## Example
 
@@ -22,14 +29,18 @@ SwiftLoggly can be used right out of the box with no configuration, simply call 
 
 ```swift
 
+
 // String
-loggly("Welcome to SwiftLoggly!")
+loggly(LogType.Info, text: "Write to the log!")
+logglyInfo(LogType.Info, text: "Write to the log!")
 
 // NSDictionary
+loggly(LogType.Verbose, dictionary: nsDictionary)
 loggly(nsDictionary)
 
 // Dictionary
-loggly(dictionary)
+loggly(LogType.Warnings, dictionary: dictionary)
+
 
 ```
 
@@ -43,7 +54,7 @@ There are a few configurable options in SwiftLog.
 
 ```swift
 //This writes to the log
-loggly("write to the log!")
+logglyInfo("Write to the log!")
 
 //Set the name of the log files
 Loggly.logger.name = "Sample" //default is "logglyfile"
