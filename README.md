@@ -4,6 +4,8 @@ Simple way to logging with rich feature framework in Swift.
 ## Features
 
 - Method can helps to log String, NSDictionary, Dictionary.
+- Added the emojis for console log.
+- Added the rich function for log tracking type.(Info, Verbose, Warnings, Debug, Error)
 
 First thing is to import the framework. See the Installation instructions on how to add the framework to your project.
 
@@ -36,11 +38,24 @@ logglyInfo(LogType.Info, text: "Write to the log!")
 
 // NSDictionary
 loggly(LogType.Verbose, dictionary: nsDictionary)
-loggly(nsDictionary)
+logglyVerbose(dictionary: nsDictionary)
 
 // Dictionary
 loggly(LogType.Warnings, dictionary: dictionary)
+logglyWarnings(dictionary: nsDictionary)
 
+// Just for fun!!
+loggly(LogType.Info, text: "Welcome to Swift Loggly")
+loggly(LogType.Verbose, text: "Fun")
+loggly(LogType.Debug, text: "is")
+loggly(LogType.Warnings, text: "Matter")
+loggly(LogType.Error, text: "here!!")
+
+[💙 Info -  Jan 31, 2017, 1:52:38 PM]: Welcome to Swift Loggly
+[💜 Warn -  Jan 31, 2017, 1:52:38 PM]: Fun
+[💚 Error -  Jan 31, 2017, 1:52:38 PM]: is
+[💛 Error -  Jan 31, 2017, 1:52:38 PM]: Matter
+[❤️ Error -  Jan 31, 2017, 1:52:38 PM]: here!!
 
 ```
 
