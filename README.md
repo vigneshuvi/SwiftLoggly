@@ -11,7 +11,7 @@ Simple way to logging with rich feature framework in Swift.
 
 ![alt text][swiftloggly]
 
-[swiftloggly]: https://github.com/vigneshuvi/SwiftCSVExport/blob/master/Screenshots/swiftloggly.png
+[swiftloggly]: https://github.com/vigneshuvi/SwiftLoggly/blob/master/Screenshots/swiftloggly.gif
 
 ## iOS/MacOS import headers
 
@@ -92,6 +92,10 @@ Loggly.logger.maxFileCount = 8 //default is 4
 Loggly.logger.directory = "/Library/XXX-folder-name-XXX" //default is the standard logging directory for each platform.
 
 ```
+
+## Sample Projects
+
+  Sample Projects available under the /Examples folder. 
 
 ## Installation
 
