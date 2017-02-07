@@ -7,6 +7,14 @@ Simple way to logging with rich feature framework in Swift.
 - Added the emojis for console log.
 - Added the rich function for log tracking type.(Info, Verbose, Warnings, Debug, Error)
 
+## Screenshots
+
+![alt text][swiftloggly]
+
+[swiftloggly]: https://github.com/vigneshuvi/SwiftCSVExport/blob/master/Screenshots/swiftloggly.png
+
+## iOS/MacOS import headers
+
 First thing is to import the framework. See the Installation instructions on how to add the framework to your project.
 
 ```swift
@@ -101,7 +109,7 @@ To use SwiftLoggly in your project add the following 'Podfile' to your project
 
 Then run:
 
-    pod install
+    pod install || pod update
 
 
 ## License

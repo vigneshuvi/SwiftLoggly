@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Verdana.ttf">
+            <string>Verdana</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SampleSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="a1Z-fk-Y7D">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">💙💜💚Swift Loggly💚💛❤️ 
+  [💙 Info -  Feb 7, 2017, 6:21:29 PM]: Welcome to Swift Loggly
+[💜 Warn -  Feb 7, 2017, 6:21:29 PM]: Fun
+[💚 Error -  Feb 7, 2017, 6:21:29 PM]: is
+[💛 Error -  Feb 7, 2017, 6:21:29 PM]: Matter
+[❤️ Error -  Feb 7, 2017, 6:21:29 PM]: here!!</mutableString>
+                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVx-eH-P3t">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="backgroundColor" red="0.85328525639999997" green="0.85328525639999997" blue="0.85328525639999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="z5v-o1-OfL"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Info" width="71" id="CHJ-UK-hqY">
+                                        <color key="tintColor" red="0.33333333329999998" green="0.43921568630000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="infoAction:" destination="BYZ-38-t0r" id="67u-fB-Heu"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GsJ-7M-MvB"/>
+                                    <barButtonItem title="Warn" id="Um7-tb-8Ag">
+                                        <color key="tintColor" red="0.90342858394769376" green="0.91340955632080545" blue="0.10370145656120407" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="warnAction:" destination="BYZ-38-t0r" id="7xj-0g-wB9"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="owI-TQ-kB5"/>
+                                    <barButtonItem title="Verbose" id="vP6-Jg-r0v">
+                                        <color key="tintColor" red="0.87058823529999996" green="0.32156862749999998" blue="0.91340955632080545" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="verboseAciton:" destination="BYZ-38-t0r" id="lZg-Ba-yXg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="9yB-Wb-rQP"/>
+                                    <barButtonItem title="Debug" id="wS1-en-dX4">
+                                        <color key="tintColor" red="0.0" green="0.70588235290000001" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="debugAction:" destination="BYZ-38-t0r" id="Td7-a5-5Ms"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="INb-Ju-C6Q"/>
+                                    <barButtonItem title="Error" id="B2D-Wn-sMp">
+                                        <color key="tintColor" red="0.87058823529999996" green="0.32156862749999998" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="errorAction:" destination="BYZ-38-t0r" id="VRT-aY-CR5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jRG-iF-wVG"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="a1Z-fk-Y7D" secondAttribute="bottom" id="DH8-Um-QIM"/>
+                            <constraint firstItem="bVx-eH-P3t" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DSJ-TH-BdJ"/>
+                            <constraint firstItem="a1Z-fk-Y7D" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Xf9-O7-KJB"/>
+                            <constraint firstAttribute="trailing" secondItem="bVx-eH-P3t" secondAttribute="trailing" id="XzD-If-dRp"/>
+                            <constraint firstAttribute="trailing" secondItem="a1Z-fk-Y7D" secondAttribute="trailing" id="mRY-ie-Z5a"/>
+                            <constraint firstItem="a1Z-fk-Y7D" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qG6-wK-YLx"/>
+                            <constraint firstAttribute="bottom" secondItem="bVx-eH-P3t" secondAttribute="bottom" id="zAX-Ir-w2Y"/>
+                        </constraints>
+                    </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textView" destination="a1Z-fk-Y7D" id="gdL-FG-Koi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="121.88905547226388"/>
+        </scene>
+    </scenes>
+</document>

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftLoggly"
-  s.version      = "0.6.2"
+  s.version      = "0.6.3"
   s.summary      = "Simple way to logging with rich feature framework in Swift."
 
   # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "The SwiftLoggly is a completely customizable framework that can be used in any iOS app."
+  s.description  = "The SwiftLoggly is a completely customizable framework that can be used in any iOS/Mac app."
 
   s.homepage     = "https://github.com/vigneshuvi/SwiftLoggly"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
