@@ -93,6 +93,31 @@ public enum LogType {
 //MARK: -  Loggly Class
 open class Loggly {
 
+     //MARK: -  Log Report Properties
+    
+    //The name of swift loggly report.
+    var logReportName = "SwiftLogglyReport";
+    
+    //The field of  loggly report.
+    var logReportFields:NSArray = ["Info", "Verbose", "Warnings", "Debug", "Error"]
+    
+    //The field of Info Count
+    var logInfoCount:NSInteger = 0
+    
+    //The field of Verbose Count
+    var logVerboseCount:NSInteger = 0
+    
+    //The field of Warnings Count
+    var logWarnCount:NSInteger = 0
+    
+    //The field of Debug Count
+    var logDebugCount:NSInteger = 0
+    
+    //The field of Error Count
+    var logErrorCount:NSInteger = 0
+    
+    //MARK: -  Log Properties
+    
     ///The max size a log file can be in Kilobytes. Default is 1024 (1 MB)
     open var maxFileSize: UInt64 = 1024;
     
@@ -114,8 +139,304 @@ open class Loggly {
         struct Static {
             static let instance: Loggly = Loggly()
         }
+        Static.instance.loadLogCounts()
         return Static.instance
     }
+    
+    //MARK: -  Reports Util Methods
+    
+    ///gets the CSV name
+    func getReportFileName() -> String {
+        return "\(logReportName).csv"
+    }
+    
+    // Set the Loggly Reports Name
+    open func setLogglyReportsName(_ name: String){
+        logReportName = name;
+    }
+    
+    // Get the Loggly Reports Name
+    open func getLogglyReportsName() -> String{
+        return logReportName;
+    }
+    
+     func loadLogCounts() {
+        if logInfoCount == 0 && logVerboseCount == 0 && logWarnCount == 0 && logDebugCount == 0 && logErrorCount == 0 {
+            self.loadLogDetails()
+        }
+    }
+    
+    func loadLogDetails() {
+        let path = "\(directory)/\(getReportFileName())"
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: path) {
+            let logDict:NSMutableDictionary = self.readReports();
+            if logDict.allKeys.count > 0 {
+                let rows:NSArray = logDict.object(forKey: "rows") as! NSArray;
+                if rows.count > 0 {
+                    for dict in rows {
+                        let row = dict as! NSDictionary
+                        for key in row.allKeys {
+                            switch (key as! String) {
+                                case "Info":
+                                    logInfoCount = (row.object(forKey: key) as! NSString).integerValue;
+                                    break
+                                case "Verbose":
+                                    logVerboseCount = (row.object(forKey: key) as! NSString).integerValue;
+                                    break
+                                case "Warnings":
+                                    logWarnCount = (row.object(forKey: key) as! NSString).integerValue;
+                                    break
+                                case "Debug":
+                                    logDebugCount = (row.object(forKey: key) as! NSString).integerValue;
+                                    break
+                                case "Error":
+                                    logErrorCount = (row.object(forKey: key) as! NSString).integerValue;
+                                    break
+                                default :
+                                    break
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Set the Loggly Reports Name
+    func increaseLogCount(_  type: LogType){
+        switch type {
+        case .Info:
+            logInfoCount += 1;
+        case .Verbose:
+            logVerboseCount += 1;
+        case .Warnings:
+            logWarnCount += 1;
+        case .Debug:
+            logDebugCount += 1;
+        case .Error:
+            logErrorCount += 1;
+        }
+        
+        _ = self.createCSVReport(self.generateReportArray())
+    }
+    
+    func generateReportArray() -> NSMutableArray {
+        // Create Dictionary object for storing log count
+        let logDictforCount:NSMutableDictionary = self.getReportsOutput()
+        // CSV rows Array
+        let data:NSMutableArray  = NSMutableArray()
+        data.add(logDictforCount);
+        return data;
+    }
+    
+    func getReportsOutput() -> NSMutableDictionary {
+        
+        // Create Dictionary object for storing log count
+        let logDictforCount:NSMutableDictionary = NSMutableDictionary()
+        logDictforCount.setObject(logInfoCount, forKey: "Info" as NSCopying);
+        logDictforCount.setObject(logVerboseCount, forKey: "Verbose" as NSCopying);
+        logDictforCount.setObject(logWarnCount, forKey: "Warnings" as NSCopying);
+        logDictforCount.setObject(logDebugCount, forKey: "Debug" as NSCopying);
+        logDictforCount.setObject(logErrorCount, forKey: "Error" as NSCopying);
+        return logDictforCount;
+    }
+    
+    // Get the Loggly Info Count
+    func getCountBasedonLogType(_ type: LogType) -> NSInteger{
+        var count:NSInteger = 0;
+        switch type {
+        case .Info:
+            count = self.getLogInfoCount();
+        case .Verbose:
+            count = self.getLogVerboseCount();
+        case .Warnings:
+            count = self.getLogWarningsCount();
+        case .Debug:
+            count = self.getLogDebugCount();
+        case .Error:
+            count = self.getLogErrorCount();
+        }
+        return count;
+    }
+   
+    
+    // Get the Loggly Info Count
+    open func getLogInfoCount() -> NSInteger{
+        return logInfoCount;
+    }
+    
+    // Get the Loggly Verbose Count
+    open func getLogVerboseCount() -> NSInteger{
+        return logVerboseCount;
+    }
+    
+    // Get the Loggly Warnings Count
+    open func getLogWarningsCount() -> NSInteger{
+        return logWarnCount;
+    }
+    
+    // Get the Loggly Debug Count
+    open func getLogDebugCount() -> NSInteger{
+        return logDebugCount;
+    }
+    
+    // Get the Loggly Error Count
+    open func getLogErrorCount() -> NSInteger{
+        return logErrorCount;
+    }
+    
+    
+    ///write content to the current csv file.
+    open func getReportsFilePath() -> String{
+        let path = "\(directory)/\(getReportFileName())"
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: path) {
+            return path;
+        } 
+        return "";
+    }
+    
+    func createCSVReport(_ values: NSArray) -> String {
+        if logReportFields.count > 0 && values.count > 0 {
+            let path = "\(directory)/\(getReportFileName())"
+            let fileManager = FileManager.default
+            if !fileManager.fileExists(atPath: path) {
+                do {
+                    try "".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+                } catch _ {
+                }
+            } else {
+                do {
+                    try "".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+                } catch _ {
+                }
+            }
+            
+            let  result:String = logReportFields.componentsJoined(by: ",");
+            Loggly.logger.writeReports( text: result)
+            for dict in values {
+                let values = (dict as! NSDictionary).allValues as NSArray;
+                let  result:String = values.componentsJoined(by: ",");
+                Loggly.logger.writeReports( text: result)
+            }
+            return Loggly.logger.getReportsFilePath();
+        }
+        return "";
+    }
+    
+    ///write content to the current csv file.
+    open func writeReports(text: String) {
+        let path = "\(directory)/\(getReportFileName())"
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: path) {
+            do {
+                try "".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+            } catch _ {
+            }
+        }
+        if let fileHandle = FileHandle(forWritingAtPath: path) {
+            let writeText = "\(text)\n"
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(writeText.data(using: String.Encoding.utf8)!)
+            fileHandle.closeFile()
+        }
+    }
+    
+    open func readReports() -> NSMutableDictionary {
+        let path = "\(directory)/\(getReportFileName())"
+        return self.readFromPath(filePath:path);
+    }
+    
+    /// read content to the current csv file.
+    open func readFromPath(filePath: String) -> NSMutableDictionary{
+        let fileManager = FileManager.default
+        let output:NSMutableDictionary = NSMutableDictionary()
+        
+        // Find the CSV file path is available
+        if fileManager.fileExists(atPath: filePath) {
+            do {
+                // Generate the Local file path URL
+                let localPathURL: URL = NSURL.fileURL(withPath: filePath);
+                
+                // Read the content from Local Path
+                let csvText = try String(contentsOf: localPathURL, encoding: String.Encoding.utf8);
+                
+                // Check the csv count
+                if csvText.characters.count > 0 {
+                    
+                    // Split based on Newline delimiter
+                    let csvArray = self.splitUsingDelimiter(csvText, separatedBy: "\n") as NSArray
+                    if csvArray.count >= 2 {
+                        var fieldsArray:NSArray = [];
+                        let rowsArray:NSMutableArray  = NSMutableArray()
+                        for row in csvArray {
+                            // Get the CSV headers
+                            if((row as! String).contains(csvArray[0] as! String)) {
+                                fieldsArray = self.splitUsingDelimiter(row as! String, separatedBy: ",") as NSArray;
+                            } else {
+                                // Get the CSV values
+                                let valuesArray = self.splitUsingDelimiter(row as! String, separatedBy: ",") as NSArray;
+                                if valuesArray.count == fieldsArray.count  && valuesArray.count > 0{
+                                    let rowJson:NSMutableDictionary = self.generateDict(fieldsArray, valuesArray: valuesArray)
+                                    if rowJson.allKeys.count > 0 && valuesArray.count == rowJson.allKeys.count && rowJson.allKeys.count == fieldsArray.count {
+                                        rowsArray.add(rowJson)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // Set the CSV headers & Values and name in the dict.
+                        if fieldsArray.count > 0 && rowsArray.count > 0 {
+                            output.setObject(fieldsArray, forKey: "fields" as NSCopying)
+                            output.setObject(rowsArray, forKey: "rows" as NSCopying)
+                            output.setObject(localPathURL.lastPathComponent, forKey: "name" as NSCopying)
+                        }
+                    }
+                }
+            }
+            catch {
+                /* error handling here */
+                print("Error while read csv: \(error)", terminator: "")
+            }
+        }
+        return output;
+    }
+    
+    func generateDict(_ fieldsArray: NSArray, valuesArray: NSArray ) -> NSMutableDictionary {
+        let rowsDictionary:NSMutableDictionary = NSMutableDictionary()
+        for i in 0..<valuesArray.count {
+            let key = fieldsArray[i];
+            let value = valuesArray[i];
+            rowsDictionary.setObject(value, forKey: key as! NSCopying);
+        }
+        return rowsDictionary;
+    }
+    
+    func splitUsingDelimiter(_ string: String, separatedBy: String) -> NSArray {
+        if string.characters.count > 0 {
+            return string.components(separatedBy: separatedBy) as NSArray;
+        }
+        return [];
+    }
+    
+    ///do the checks and cleanup
+    open func cleanupReports() {
+        let path = "\(directory)/\(getReportFileName())"
+        let size = fileSize(path)
+        if size > 0 {
+            //delete the oldest file
+            let deletePath = "\(directory)/\(getReportFileName())"
+            let fileManager = FileManager.default
+            do {
+                try fileManager.removeItem(atPath: deletePath)
+            } catch _ {
+            }
+        }
+    }
+    
+    //MARK: -  Loggly Util Methods
     
     //the date formatter
     var dateFormatter: DateFormatter {
@@ -132,19 +453,19 @@ open class Loggly {
     ///gets the log type with String
     // use colored Emojis for better visual distinction
     // of log level for Xcode 8
-    func logTypeName(_ type: LogType) -> String {
+    func logTypeName(_ type: LogType, isEmojis:Bool) -> String {
         var logTypeStr = "";
         switch type {
         case .Info:
-           logTypeStr = "💙 Info - "
+            logTypeStr = isEmojis ? "💙 Info - " : "Info - ";
         case .Verbose:
-             logTypeStr = "💜 Warn - "
+             logTypeStr = isEmojis ? "💜 Verbose - " : "Verbose - ";
         case .Warnings:
-             logTypeStr = "💛 Error - "
+             logTypeStr = isEmojis ? "💛 Warnings - " : "Warnings - ";
         case .Debug:
-            logTypeStr = "💚 Error - "
+            logTypeStr = isEmojis ? "💚 Debug - " : "Debug - ";
         case .Error:
-            logTypeStr = "❤️ Error - "
+            logTypeStr = isEmojis ? "❤️ Error - " : "Error - ";
         }
         
         return logTypeStr;
@@ -178,13 +499,15 @@ open class Loggly {
         }
         if let fileHandle = FileHandle(forWritingAtPath: path) {
             let dateStr = dateFormatter.string(from: Date())
-            let writeText = "[\(logTypeName(type)) \(dateStr)]: \(text)\n"
+            var writeText = "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\n"
             fileHandle.seekToEndOfFile()
             fileHandle.write(writeText.data(using: String.Encoding.utf8)!)
             fileHandle.closeFile()
+            writeText = "[\(logTypeName(type, isEmojis: true)) \(dateStr)]: \(text)\n"
             print(writeText, terminator: "")
             cleanup()
         }
+        self.increaseLogCount(type);
     }
     
     ///do the checks and cleanup
@@ -259,7 +582,25 @@ open class Loggly {
     
 }
 
+//MARK: -  Loggly Util Methods
+
+///a free function to make writing to the log with Log type
+public func getLogglyReportsOutput() -> NSDictionary {
+   return Loggly.logger.getReportsOutput()
+}
+
+// Before logging details it return empty path. Once logging is done. Method return exact report path
+public func getLogglyReportCSVfilPath() -> String {
+    return Loggly.logger.getReportsFilePath()
+}
+
+// Get the Loggly Info Count
+public func getLogCountBasedonType(_ type: LogType) -> NSInteger{
+    return Loggly.logger.getCountBasedonLogType(type);
+}
+
 //MARK: -  Loggly Info Methods
+
 ///a free function to make writing to the log
 public func logglyInfo(text: String) {
     Loggly.logger.write(LogType.Info, text: text)
@@ -339,6 +680,17 @@ public func logglyError(_  dictionary: NSDictionary) {
     Loggly.logger.write(LogType.Error, text: dictionary.jsonString)
 }
 
+///a free function to make writing to the log with Log type
+public func logglyError(_  error: NSError) {
+    Loggly.logger.write(LogType.Error, text: error.localizedDescription)
+}
+
+///a free function to make writing to the log with Log type
+public func logglyError(_  error: Error) {
+    Loggly.logger.write(LogType.Error, text: error.localizedDescription)
+}
+
+
 //MARK: -  Loggly Methods with Log type
 
 ///a free function to make writing to the log with Log type
@@ -355,3 +707,5 @@ public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
 public func loggly(_ type: LogType, dictionary: NSDictionary) {
     Loggly.logger.write(type, text: dictionary.jsonString)
 }
+
+

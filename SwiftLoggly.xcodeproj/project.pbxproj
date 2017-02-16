@@ -7,23 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B3B6C071E3F6222003AE9C4 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
-		0B3B6C0C1E3F6222003AE9C4 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C0B1E3F6222003AE9C4 /* SwiftLogglyTests.swift */; };
 		0B3B6C0E1E3F6222003AE9C4 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B3B6C181E3F627A003AE9C4 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C171E3F627A003AE9C4 /* Loggly.swift */; };
 		0B3B6C8B1E3F8B48003AE9C4 /* SwiftLogglyOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */; };
 		0B3B6C901E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */; };
 		0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0B69156E1E4DA962007C9394 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C171E3F627A003AE9C4 /* Loggly.swift */; };
+		0B6915701E4DB54B007C9394 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; };
+		0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
+		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0B3B6C081E3F6222003AE9C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B3B6BF41E3F6221003AE9C4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0B3B6BFC1E3F6221003AE9C4;
-			remoteInfo = SwiftLoggly;
-		};
 		0B3B6C8C1E3F8B48003AE9C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0B3B6BF41E3F6221003AE9C4 /* Project object */;
@@ -31,15 +26,19 @@
 			remoteGlobalIDString = 0B3B6C811E3F8B47003AE9C4;
 			remoteInfo = SwiftLogglyOSX;
 		};
+		0B69157B1E4DB71F007C9394 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B3B6BF41E3F6221003AE9C4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B3B6BFC1E3F6221003AE9C4;
+			remoteInfo = SwiftLoggly;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLoggly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLoggly.h; sourceTree = "<group>"; };
 		0B3B6C011E3F6221003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B3B6C061E3F6222003AE9C4 /* SwiftLogglyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B3B6C0B1E3F6222003AE9C4 /* SwiftLogglyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyTests.swift; sourceTree = "<group>"; };
-		0B3B6C0D1E3F6222003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B3B6C171E3F627A003AE9C4 /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggly.swift; sourceTree = "<group>"; };
 		0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLogglyOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLogglyOSX.h; sourceTree = "<group>"; };
@@ -47,6 +46,9 @@
 		0B3B6C8A1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyOSXTests.swift; sourceTree = "<group>"; };
 		0B3B6C911E3F8B48003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyTests.swift; sourceTree = "<group>"; };
+		0B6915791E4DB71F007C9394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0B3B6C031E3F6222003AE9C4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0B3B6C071E3F6222003AE9C4 /* SwiftLoggly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +74,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0B6915721E4DB71F007C9394 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				0B3B6BFF1E3F6221003AE9C4 /* SwiftLoggly */,
-				0B3B6C0A1E3F6222003AE9C4 /* SwiftLogglyTests */,
+				0B6915761E4DB71F007C9394 /* SwiftLogglyTests */,
 				0B3B6C831E3F8B47003AE9C4 /* SwiftLogglyOSX */,
 				0B3B6C8E1E3F8B48003AE9C4 /* SwiftLogglyOSXTests */,
 				0B3B6BFE1E3F6221003AE9C4 /* Products */,
@@ -98,9 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */,
-				0B3B6C061E3F6222003AE9C4 /* SwiftLogglyTests.xctest */,
 				0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */,
 				0B3B6C8A1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.xctest */,
+				0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,15 +115,6 @@
 				0B3B6C171E3F627A003AE9C4 /* Loggly.swift */,
 			);
 			path = SwiftLoggly;
-			sourceTree = "<group>";
-		};
-		0B3B6C0A1E3F6222003AE9C4 /* SwiftLogglyTests */ = {
-			isa = PBXGroup;
-			children = (
-				0B3B6C0B1E3F6222003AE9C4 /* SwiftLogglyTests.swift */,
-				0B3B6C0D1E3F6222003AE9C4 /* Info.plist */,
-			);
-			path = SwiftLogglyTests;
 			sourceTree = "<group>";
 		};
 		0B3B6C831E3F8B47003AE9C4 /* SwiftLogglyOSX */ = {
@@ -142,6 +135,15 @@
 			path = SwiftLogglyOSXTests;
 			sourceTree = "<group>";
 		};
+		0B6915761E4DB71F007C9394 /* SwiftLogglyTests */ = {
+			isa = PBXGroup;
+			children = (
+				0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */,
+				0B6915791E4DB71F007C9394 /* Info.plist */,
+			);
+			path = SwiftLogglyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -157,6 +159,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B6915701E4DB54B007C9394 /* SwiftLoggly.h in Headers */,
 				0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,24 +184,6 @@
 			productName = SwiftLoggly;
 			productReference = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		0B3B6C051E3F6222003AE9C4 /* SwiftLogglyTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0B3B6C141E3F6222003AE9C4 /* Build configuration list for PBXNativeTarget "SwiftLogglyTests" */;
-			buildPhases = (
-				0B3B6C021E3F6222003AE9C4 /* Sources */,
-				0B3B6C031E3F6222003AE9C4 /* Frameworks */,
-				0B3B6C041E3F6222003AE9C4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0B3B6C091E3F6222003AE9C4 /* PBXTargetDependency */,
-			);
-			name = SwiftLogglyTests;
-			productName = SwiftLogglyTests;
-			productReference = 0B3B6C061E3F6222003AE9C4 /* SwiftLogglyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		0B3B6C811E3F8B47003AE9C4 /* SwiftLogglyOSX */ = {
 			isa = PBXNativeTarget;
@@ -236,6 +221,24 @@
 			productReference = 0B3B6C8A1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		0B6915741E4DB71F007C9394 /* SwiftLogglyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B69157D1E4DB71F007C9394 /* Build configuration list for PBXNativeTarget "SwiftLogglyTests" */;
+			buildPhases = (
+				0B6915711E4DB71F007C9394 /* Sources */,
+				0B6915721E4DB71F007C9394 /* Frameworks */,
+				0B6915731E4DB71F007C9394 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0B69157C1E4DB71F007C9394 /* PBXTargetDependency */,
+			);
+			name = SwiftLogglyTests;
+			productName = SwiftLogglyTests;
+			productReference = 0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -252,18 +255,17 @@
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
-					0B3B6C051E3F6222003AE9C4 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7FUQA46NH7;
-						LastSwiftMigration = 0810;
-						ProvisioningStyle = Automatic;
-					};
 					0B3B6C811E3F8B47003AE9C4 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 7FUQA46NH7;
 						ProvisioningStyle = Automatic;
 					};
 					0B3B6C891E3F8B48003AE9C4 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 7FUQA46NH7;
+						ProvisioningStyle = Automatic;
+					};
+					0B6915741E4DB71F007C9394 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 7FUQA46NH7;
 						ProvisioningStyle = Automatic;
@@ -283,7 +285,7 @@
 			projectRoot = "";
 			targets = (
 				0B3B6BFC1E3F6221003AE9C4 /* SwiftLoggly */,
-				0B3B6C051E3F6222003AE9C4 /* SwiftLogglyTests */,
+				0B6915741E4DB71F007C9394 /* SwiftLogglyTests */,
 				0B3B6C811E3F8B47003AE9C4 /* SwiftLogglyOSX */,
 				0B3B6C891E3F8B48003AE9C4 /* SwiftLogglyOSXTests */,
 			);
@@ -292,13 +294,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		0B3B6BFB1E3F6221003AE9C4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0B3B6C041E3F6222003AE9C4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -319,6 +314,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0B6915731E4DB71F007C9394 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -330,18 +332,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0B3B6C021E3F6222003AE9C4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0B3B6C0C1E3F6222003AE9C4 /* SwiftLogglyTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0B3B6C7D1E3F8B47003AE9C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B69156E1E4DA962007C9394 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,18 +348,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0B6915711E4DB71F007C9394 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0B3B6C091E3F6222003AE9C4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0B3B6BFC1E3F6221003AE9C4 /* SwiftLoggly */;
-			targetProxy = 0B3B6C081E3F6222003AE9C4 /* PBXContainerItemProxy */;
-		};
 		0B3B6C8D1E3F8B48003AE9C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0B3B6C811E3F8B47003AE9C4 /* SwiftLogglyOSX */;
 			targetProxy = 0B3B6C8C1E3F8B48003AE9C4 /* PBXContainerItemProxy */;
+		};
+		0B69157C1E4DB71F007C9394 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0B3B6BFC1E3F6221003AE9C4 /* SwiftLoggly */;
+			targetProxy = 0B69157B1E4DB71F007C9394 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -509,6 +512,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = SwiftLoggly/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -518,44 +522,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 3.0;
-				VALID_ARCHS = "arm64 armv7 armv7s";
-			};
-			name = Release;
-		};
-		0B3B6C151E3F6222003AE9C4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 7FUQA46NH7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftLogglyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vigneshuvi.SwiftLogglyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = macosx;
-				SWIFT_VERSION = 3.0;
-				VALID_ARCHS = "arm64 armv7 armv7s";
-			};
-			name = Debug;
-		};
-		0B3B6C161E3F6222003AE9C4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = 7FUQA46NH7;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftLogglyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vigneshuvi.SwiftLogglyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -614,6 +580,7 @@
 		0B3B6C971E3F8B48003AE9C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7FUQA46NH7;
@@ -630,6 +597,7 @@
 		0B3B6C981E3F8B48003AE9C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7FUQA46NH7;
@@ -639,6 +607,33 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vigneshuvi.SwiftLogglyOSXTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		0B69157E1E4DB71F007C9394 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 7FUQA46NH7;
+				INFOPLIST_FILE = SwiftLogglyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vigneshuvi.SwiftLogglyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		0B69157F1E4DB71F007C9394 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 7FUQA46NH7;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = SwiftLogglyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vigneshuvi.SwiftLogglyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -664,15 +659,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0B3B6C141E3F6222003AE9C4 /* Build configuration list for PBXNativeTarget "SwiftLogglyTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0B3B6C151E3F6222003AE9C4 /* Debug */,
-				0B3B6C161E3F6222003AE9C4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0B3B6C931E3F8B48003AE9C4 /* Build configuration list for PBXNativeTarget "SwiftLogglyOSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -680,12 +666,22 @@
 				0B3B6C951E3F8B48003AE9C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B3B6C961E3F8B48003AE9C4 /* Build configuration list for PBXNativeTarget "SwiftLogglyOSXTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0B3B6C971E3F8B48003AE9C4 /* Debug */,
 				0B3B6C981E3F8B48003AE9C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0B69157D1E4DB71F007C9394 /* Build configuration list for PBXNativeTarget "SwiftLogglyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B69157E1E4DB71F007C9394 /* Debug */,
+				0B69157F1E4DB71F007C9394 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

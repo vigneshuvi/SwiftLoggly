@@ -2,11 +2,12 @@
 //  SwiftLogglyTests.swift
 //  SwiftLogglyTests
 //
-//  Created by Vignesh on 30/01/17.
+//  Created by Vignesh on 10/02/17.
 //  Copyright © 2017 vigneshuvi. All rights reserved.
 //
 
 import XCTest
+@testable import SwiftLoggly
 
 class SwiftLogglyTests: XCTestCase {
     
@@ -23,6 +24,22 @@ class SwiftLogglyTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        loggly(LogType.Info, text: "Welcome to Swift Loggly")
+        loggly(LogType.Verbose, text: "Fun")
+        
+        loggly(LogType.Debug, text: "is")
+        loggly(LogType.Warnings, text: "Matter")
+        loggly(LogType.Error, text: "here!!")
+        
+        print(getLogglyReportsOutput());
+        loggly(LogType.Debug, text: "is")
+        loggly(LogType.Warnings, text: "Matter")
+        loggly(LogType.Error, text: "here!!")
+        print(getLogglyReportsOutput());
+        loggly(LogType.Debug, text: "is")
+        loggly(LogType.Warnings, text: "Matter")
+        loggly(LogType.Error, text: "here!!")
+        print(getLogCountBasedonType(LogType.Warnings));
     }
     
     func testPerformanceExample() {
