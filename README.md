@@ -7,7 +7,8 @@ Simple way to logging with rich feature framework in Swift.
 - Added the emojis for console log.
 - Added the rich function for log tracking type.(Info, Verbose, Warnings, Debug, Error)
 - Able to get logs count based on each type of log and export as CSV file.
-- Support CocoaPods, mac OS, Vapor framework.
+- Coloured output log in Terminal for mac OS.
+- Support CocoaPods, mac OS and Vapor framework(Swift Package Manager).
 
 
 ## Screenshots
@@ -118,7 +119,7 @@ Then run:
 
     pod install || pod update
 
-### Add dependencies in Vapor and Installation
+### Swift Package Manager for Vapor
 
 You need to add to dependencies in your 'Package.swift' and fetch Swift module using terminal comment.
 
