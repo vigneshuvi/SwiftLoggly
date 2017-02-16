@@ -53,32 +53,33 @@ extension NSDictionary {
 
 //MARK: -  Struct for Color Log
 struct ColorLog {
-    static let ESCAPE = "\u{001b}["
+    
+    static let ESCAPE = "\u{001B}["
     
     static let RESET_FG = ESCAPE + "fg;" // Clear any foreground color
     static let RESET_BG = ESCAPE + "bg;" // Clear any background color
-    static let RESET = ESCAPE + ";"   // Clear any foreground or background color
+    static let RESET = ESCAPE + "0m"   // Clear any foreground or background color
     
     static func red<T>(object: T) {
-        print("\(ESCAPE)fg255,0,0;\(object)\(RESET)")
+        print("\(ESCAPE)31m\(object)\(RESET)")
     }
     
     static func green<T>(object: T) {
-        print("\(ESCAPE)fg0,255,0;\(object)\(RESET)")
+        print("\(ESCAPE)32m\(object)\(RESET)")
     }
     
     static func blue<T>(object: T) {
-        print("\(ESCAPE)fg0,0,255;\(object)\(RESET)")
+        print("\(ESCAPE)34m\(object)\(RESET)")
     }
     
     static func yellow<T>(object: T) {
-        print("\(ESCAPE)fg255,255,0;\(object)\(RESET)")
+        print("\(ESCAPE)33m\(object)\(RESET)")
     }
     
     static func purple<T>(object: T) {
-        print("\(ESCAPE)fg255,0,255;\(object)\(RESET)")
+        print("\(ESCAPE)35m\(object)\(RESET)")
     }
-
+    
 }
 
 //MARK: -  Enumaration for log type
@@ -92,8 +93,8 @@ public enum LogType {
 
 //MARK: -  Loggly Class
 open class Loggly {
-
-     //MARK: -  Log Report Properties
+    
+    //MARK: -  Log Report Properties
     
     //The name of swift loggly report.
     var logReportName = "SwiftLogglyReport";
@@ -160,7 +161,7 @@ open class Loggly {
         return logReportName;
     }
     
-     func loadLogCounts() {
+    func loadLogCounts() {
         if logInfoCount == 0 && logVerboseCount == 0 && logWarnCount == 0 && logDebugCount == 0 && logErrorCount == 0 {
             self.loadLogDetails()
         }
@@ -178,23 +179,23 @@ open class Loggly {
                         let row = dict as! NSDictionary
                         for key in row.allKeys {
                             switch (key as! String) {
-                                case "Info":
-                                    logInfoCount = (row.object(forKey: key) as! NSString).integerValue;
-                                    break
-                                case "Verbose":
-                                    logVerboseCount = (row.object(forKey: key) as! NSString).integerValue;
-                                    break
-                                case "Warnings":
-                                    logWarnCount = (row.object(forKey: key) as! NSString).integerValue;
-                                    break
-                                case "Debug":
-                                    logDebugCount = (row.object(forKey: key) as! NSString).integerValue;
-                                    break
-                                case "Error":
-                                    logErrorCount = (row.object(forKey: key) as! NSString).integerValue;
-                                    break
-                                default :
-                                    break
+                            case "Info":
+                                logInfoCount = (row.object(forKey: key) as! NSString).integerValue;
+                                break
+                            case "Verbose":
+                                logVerboseCount = (row.object(forKey: key) as! NSString).integerValue;
+                                break
+                            case "Warnings":
+                                logWarnCount = (row.object(forKey: key) as! NSString).integerValue;
+                                break
+                            case "Debug":
+                                logDebugCount = (row.object(forKey: key) as! NSString).integerValue;
+                                break
+                            case "Error":
+                                logErrorCount = (row.object(forKey: key) as! NSString).integerValue;
+                                break
+                            default :
+                                break
                             }
                             
                         }
@@ -260,7 +261,7 @@ open class Loggly {
         }
         return count;
     }
-   
+    
     
     // Get the Loggly Info Count
     open func getLogInfoCount() -> NSInteger{
@@ -294,7 +295,7 @@ open class Loggly {
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             return path;
-        } 
+        }
         return "";
     }
     
@@ -459,9 +460,9 @@ open class Loggly {
         case .Info:
             logTypeStr = isEmojis ? "💙 Info - " : "Info - ";
         case .Verbose:
-             logTypeStr = isEmojis ? "💜 Verbose - " : "Verbose - ";
+            logTypeStr = isEmojis ? "💜 Verbose - " : "Verbose - ";
         case .Warnings:
-             logTypeStr = isEmojis ? "💛 Warnings - " : "Warnings - ";
+            logTypeStr = isEmojis ? "💛 Warnings - " : "Warnings - ";
         case .Debug:
             logTypeStr = isEmojis ? "💚 Debug - " : "Debug - ";
         case .Error:
@@ -503,8 +504,8 @@ open class Loggly {
             fileHandle.seekToEndOfFile()
             fileHandle.write(writeText.data(using: String.Encoding.utf8)!)
             fileHandle.closeFile()
-            writeText = "[\(logTypeName(type, isEmojis: true)) \(dateStr)]: \(text)\n"
-            print(writeText, terminator: "")
+            writeText = "[\(logTypeName(type, isEmojis: true)) \(dateStr)]: \(text)"
+            printLog(type, text:writeText)
             cleanup()
         }
         self.increaseLogCount(type);
@@ -586,7 +587,7 @@ open class Loggly {
 
 ///a free function to make writing to the log with Log type
 public func getLogglyReportsOutput() -> NSDictionary {
-   return Loggly.logger.getReportsOutput()
+    return Loggly.logger.getReportsOutput()
 }
 
 // Before logging details it return empty path. Once logging is done. Method return exact report path
@@ -707,5 +708,3 @@ public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
 public func loggly(_ type: LogType, dictionary: NSDictionary) {
     Loggly.logger.write(type, text: dictionary.jsonString)
 }
-
-
