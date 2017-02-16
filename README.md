@@ -7,6 +7,8 @@ Simple way to logging with rich feature framework in Swift.
 - Added the emojis for console log.
 - Added the rich function for log tracking type.(Info, Verbose, Warnings, Debug, Error)
 - Able to get logs count based on each type of log and export as CSV file.
+- Support CocoaPods, mac OS, Vapor framework.
+
 
 ## Screenshots
 
@@ -68,13 +70,13 @@ loggly(LogType.Error, text: "here!!")
 
 ```
 
-That will create a log file in the proper directory on both OS X and iOS.
+That will create a log file in the proper directory on both OS X/Ubuntu and iOS.
 
-OS X log files will be created in the OS X log directory (found under: /Library/Logs). The iOS log files will be created in your apps document directory under a folder called Logs.
+OS X/Ubuntu log files will be created in the log directory (found under: /Library/Logs). The iOS log files will be created in your apps document directory under a folder called Logs.
 
 ## Configuration
 
-There are a few configurable options in SwiftLog.
+There are a few configurable options in SwiftLoggly.
 
 ```swift
 //This writes to the log
@@ -116,6 +118,24 @@ Then run:
 
     pod install || pod update
 
+### Add dependencies in Vapor and Installation
+
+You need to add to dependencies in your 'Package.swift' and fetch Swift module using terminal comment.
+
+```swift
+// Vapor
+dependencies: [
+        .Package(url: "https://github.com/vigneshuvi/SwiftLoggly.git", majorVersion: 1, minor: 0)
+        ],
+
+Then run:
+
+    vapor build || vapor xcode
+
+// Importing header
+import SwiftLoggly
+
+```
 
 ## License
 

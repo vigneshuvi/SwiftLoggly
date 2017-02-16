@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0B3B6C0E1E3F6222003AE9C4 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B3B6C181E3F627A003AE9C4 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C171E3F627A003AE9C4 /* Loggly.swift */; };
 		0B3B6C8B1E3F8B48003AE9C4 /* SwiftLogglyOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */; };
 		0B3B6C901E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */; };
 		0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B69156E1E4DA962007C9394 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C171E3F627A003AE9C4 /* Loggly.swift */; };
+		0B41130B1E55AA1B00ADEE0F /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B41130A1E55AA1B00ADEE0F /* Loggly.swift */; };
 		0B6915701E4DB54B007C9394 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; };
 		0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
@@ -39,13 +38,13 @@
 		0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLoggly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLoggly.h; sourceTree = "<group>"; };
 		0B3B6C011E3F6221003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B3B6C171E3F627A003AE9C4 /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggly.swift; sourceTree = "<group>"; };
 		0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftLogglyOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLogglyOSX.h; sourceTree = "<group>"; };
 		0B3B6C851E3F8B47003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B3B6C8A1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyOSXTests.swift; sourceTree = "<group>"; };
 		0B3B6C911E3F8B48003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B41130A1E55AA1B00ADEE0F /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggly.swift; sourceTree = "<group>"; };
 		0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyTests.swift; sourceTree = "<group>"; };
 		0B6915791E4DB71F007C9394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,9 +109,9 @@
 		0B3B6BFF1E3F6221003AE9C4 /* SwiftLoggly */ = {
 			isa = PBXGroup;
 			children = (
+				0B41130A1E55AA1B00ADEE0F /* Loggly.swift */,
 				0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */,
 				0B3B6C011E3F6221003AE9C4 /* Info.plist */,
-				0B3B6C171E3F627A003AE9C4 /* Loggly.swift */,
 			);
 			path = SwiftLoggly;
 			sourceTree = "<group>";
@@ -328,7 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B3B6C181E3F627A003AE9C4 /* Loggly.swift in Sources */,
+				0B41130B1E55AA1B00ADEE0F /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +335,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B69156E1E4DA962007C9394 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +578,6 @@
 		0B3B6C971E3F8B48003AE9C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7FUQA46NH7;
@@ -597,7 +594,6 @@
 		0B3B6C981E3F8B48003AE9C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7FUQA46NH7;
@@ -614,6 +610,7 @@
 		0B69157E1E4DB71F007C9394 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 7FUQA46NH7;
 				INFOPLIST_FILE = SwiftLogglyTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
@@ -627,6 +624,7 @@
 		0B69157F1E4DB71F007C9394 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 7FUQA46NH7;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = SwiftLogglyTests/Info.plist;
@@ -684,6 +682,7 @@
 				0B69157F1E4DB71F007C9394 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
