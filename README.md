@@ -34,22 +34,24 @@ import SwiftLoggly
 //macOS
 import SwiftLogglyOSX
 
-```
 
 // Enumaration for log format type
-enum LogFormatType {
+public enum LogFormatType {
     case Normal
     case JSON
 }
 
 // Enumaration for log type
-enum LogType {
+public enum LogType {
     case Info
     case Verbose
     case Warnings
     case Debug
     case Error
 }
+
+```
+
 
 ## Example
 
