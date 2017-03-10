@@ -13,6 +13,8 @@ Simple way to logging with rich feature framework in Swift.
 - Able to get logs count based on each type of log and export as CSV file.
 - Coloured output log in Terminal for mac OS.
 - Support CocoaPods, mac OS and Vapor framework(Swift Package Manager).
+- Enabled logged format as Normal, JSON.
+- Able to encoding log based on log Encoding Type(utf8, ascii, unicode, utf16, etc) Refer: String.Encoding.
 
 
 ## Screenshots
@@ -33,6 +35,14 @@ import SwiftLoggly
 import SwiftLogglyOSX
 
 ```
+
+// Enumaration for log format type
+enum LogFormatType {
+    case Normal
+    case JSON
+}
+
+// Enumaration for log type
 enum LogType {
     case Info
     case Verbose
@@ -67,11 +77,21 @@ loggly(LogType.Debug, text: "is")
 loggly(LogType.Warnings, text: "Matter")
 loggly(LogType.Error, text: "here!!")
 
+// Normal Type 
+
 [💙 Info -  Jan 31, 2017, 1:52:38 PM]: Welcome to Swift Loggly
 [💜 Warn -  Jan 31, 2017, 1:52:38 PM]: Fun
 [💚 Error -  Jan 31, 2017, 1:52:38 PM]: is
 [💛 Error -  Jan 31, 2017, 1:52:38 PM]: Matter
 [❤️ Error -  Jan 31, 2017, 1:52:38 PM]: here!!
+
+// JSON Type
+
+{  "LogType" : "Info",  "LogDate" : "Mar 10, 2017, 2:53:15 PM",  "LogMessage" : "Welcome to Swift Loggly"}
+{  "LogType" : "Verbose",  "LogDate" : "Mar 10, 2017, 2:53:15 PM",  "LogMessage" : "Fun"}
+{  "LogType" : "Debug",  "LogDate" : "Mar 10, 2017, 2:53:15 PM",  "LogMessage" : "is"}
+{  "LogType" : "Error",  "LogDate" : "Mar 10, 2017, 2:53:15 PM",  "LogMessage" : "here!!"}
+{  "LogType" : "Info",  "LogDate" : "Mar 10, 2017, 2:53:15 PM",  "LogMessage" : "{  \"name\" : \"Vignesh\",  \"Position\" : \"Senior Engineer\"}"}
 
 ```
 
@@ -86,6 +106,12 @@ There are a few configurable options in SwiftLoggly.
 ```swift
 //This writes to the log
 logglyInfo("Write to the log!")
+
+//Set the log save format type
+Loggly.logger.logFormateType = LogFormateType.JSON  //default is "Normal"
+
+// Set the log encoding format
+Loggly.logger.logEncodingType = String.Encoding.utf8;  //default is "utf8"
 
 //Set the name of the log files
 Loggly.logger.name = "Sample" //default is "logglyfile"

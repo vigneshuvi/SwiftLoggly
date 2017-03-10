@@ -22,7 +22,7 @@ extension Dictionary {
         let invalidJson = "Not a valid JSON"
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-            return String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
+            return  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
         } catch {
             return invalidJson
         }
@@ -40,7 +40,7 @@ extension NSDictionary {
         let invalidJson = "Not a valid JSON"
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-            return String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
+            return  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
         } catch {
             return invalidJson
         }
@@ -91,6 +91,12 @@ public enum LogType {
     case Error
 }
 
+//MARK: -  Enumaration for log type
+public enum LogFormatType {
+    case Normal
+    case JSON
+}
+
 //MARK: -  Loggly Class
 open class Loggly {
     
@@ -119,6 +125,12 @@ open class Loggly {
     
     //MARK: -  Log Properties
     
+    //The log encodeing format
+    open var logEncodingType:String.Encoding = String.Encoding.utf8;
+    
+    //Log items saved format .
+    open var logFormatType = LogFormatType.Normal;
+    
     ///The max size a log file can be in Kilobytes. Default is 1024 (1 MB)
     open var maxFileSize: UInt64 = 1024;
     
@@ -128,11 +140,15 @@ open class Loggly {
     ///The directory in which the log files will be written
     open var directory = Loggly.defaultDirectory();
     
+    ///The reportDirectory in which the report files will be written
+    var reportDirectory = Loggly.defaultReportDirectory();
+    
     //The name of the log files.
     open var name = "logglyfile";
     
     //The date format of the log time.
     open var logDateFormat = "";
+
     
     ///logging singleton
     open class var logger: Loggly {
@@ -168,7 +184,7 @@ open class Loggly {
     }
     
     func loadLogDetails() {
-        let path = "\(directory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(getReportFileName())"
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             let logDict:NSMutableDictionary = self.readReports();
@@ -210,14 +226,19 @@ open class Loggly {
         switch type {
         case .Info:
             logInfoCount += 1;
+            break;
         case .Verbose:
             logVerboseCount += 1;
+            break;
         case .Warnings:
             logWarnCount += 1;
+            break;
         case .Debug:
             logDebugCount += 1;
+            break;
         case .Error:
             logErrorCount += 1;
+            break;
         }
         
         _ = self.createCSVReport(self.generateReportArray())
@@ -236,11 +257,11 @@ open class Loggly {
         
         // Create Dictionary object for storing log count
         let logDictforCount:NSMutableDictionary = NSMutableDictionary()
-        logDictforCount.setObject(logInfoCount, forKey: "Info" as NSCopying);
-        logDictforCount.setObject(logVerboseCount, forKey: "Verbose" as NSCopying);
-        logDictforCount.setObject(logWarnCount, forKey: "Warnings" as NSCopying);
-        logDictforCount.setObject(logDebugCount, forKey: "Debug" as NSCopying);
-        logDictforCount.setObject(logErrorCount, forKey: "Error" as NSCopying);
+        logDictforCount.setValue(logInfoCount, forKey: "Info");
+        logDictforCount.setValue(logVerboseCount, forKey: "Verbose" );
+        logDictforCount.setValue(logWarnCount, forKey: "Warnings");
+        logDictforCount.setValue(logDebugCount, forKey: "Debug");
+        logDictforCount.setValue(logErrorCount, forKey: "Error");
         return logDictforCount;
     }
     
@@ -250,14 +271,19 @@ open class Loggly {
         switch type {
         case .Info:
             count = self.getLogInfoCount();
+            break;
         case .Verbose:
             count = self.getLogVerboseCount();
+            break;
         case .Warnings:
             count = self.getLogWarningsCount();
+            break;
         case .Debug:
             count = self.getLogDebugCount();
+            break;
         case .Error:
             count = self.getLogErrorCount();
+            break;
         }
         return count;
     }
@@ -291,7 +317,7 @@ open class Loggly {
     
     ///write content to the current csv file.
     open func getReportsFilePath() -> String{
-        let path = "\(directory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(getReportFileName())"
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             return path;
@@ -301,7 +327,7 @@ open class Loggly {
     
     func createCSVReport(_ values: NSArray) -> String {
         if logReportFields.count > 0 && values.count > 0 {
-            let path = "\(directory)/\(getReportFileName())"
+            let path = "\(reportDirectory)/\(getReportFileName())"
             let fileManager = FileManager.default
             if !fileManager.fileExists(atPath: path) {
                 do {
@@ -329,7 +355,7 @@ open class Loggly {
     
     ///write content to the current csv file.
     open func writeReports(text: String) {
-        let path = "\(directory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(getReportFileName())"
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: path) {
             do {
@@ -346,7 +372,7 @@ open class Loggly {
     }
     
     open func readReports() -> NSMutableDictionary {
-        let path = "\(directory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(getReportFileName())"
         return self.readFromPath(filePath:path);
     }
     
@@ -424,7 +450,7 @@ open class Loggly {
     
     ///do the checks and cleanup
     open func cleanupReports() {
-        let path = "\(directory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(getReportFileName())"
         let size = fileSize(path)
         if size > 0 {
             //delete the oldest file
@@ -459,16 +485,44 @@ open class Loggly {
         switch type {
         case .Info:
             logTypeStr = isEmojis ? "💙 Info - " : "Info - ";
+            break;
         case .Verbose:
             logTypeStr = isEmojis ? "💜 Verbose - " : "Verbose - ";
+            break;
         case .Warnings:
             logTypeStr = isEmojis ? "💛 Warnings - " : "Warnings - ";
+            break;
         case .Debug:
             logTypeStr = isEmojis ? "💚 Debug - " : "Debug - ";
+            break;
         case .Error:
             logTypeStr = isEmojis ? "❤️ Error - " : "Error - ";
+            break;
         }
         
+        return logTypeStr;
+    }
+    
+    // Gets the log type with String
+    func logJSONTypeName(_ type: LogType) -> String {
+        var logTypeStr = "";
+        switch type {
+        case .Info:
+            logTypeStr =  "Info"
+            break;
+        case .Verbose:
+            logTypeStr = "Verbose" ;
+            break;
+        case .Warnings:
+            logTypeStr = "Warnings" ;
+            break;
+        case .Debug:
+            logTypeStr = "Debug"  ;
+            break;
+        case .Error:
+            logTypeStr = "Error";
+            break;
+        }
         return logTypeStr;
     }
     
@@ -477,15 +531,33 @@ open class Loggly {
         switch type {
         case .Info:
             ColorLog.blue(object: text)
+            break;
         case .Verbose:
             ColorLog.purple(object: text)
+            break;
         case .Warnings:
             ColorLog.yellow(object: text)
+            break;
         case .Debug:
             ColorLog.green(object: text)
+            break;
         case .Error:
             ColorLog.red(object: text)
+            break;
         }
+    }
+    
+    // Generate log text base on Log Format type.
+    func getWriteTextBasedOnType(_ type: LogType, text: String, isDelimiter: Bool) -> String {
+        let dateStr = dateFormatter.string(from: Date())
+        if(logFormatType == LogFormatType.JSON) {
+            let logJson = NSMutableDictionary();
+            logJson.setValue(logJSONTypeName(type), forKey: "LogType")
+            logJson.setValue(dateStr, forKey: "LogDate")
+            logJson.setValue(text, forKey: "LogMessage")
+            return "\(logJson.jsonString.replacingOccurrences(of: "\n", with: ""))\(isDelimiter ?"\n":"")"
+        }
+        return "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
     }
     
     ///write content to the current log file.
@@ -494,18 +566,23 @@ open class Loggly {
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: path) {
             do {
-                try "".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+                try "".write(toFile: path, atomically: true, encoding: logEncodingType)
             } catch _ {
             }
         }
         if let fileHandle = FileHandle(forWritingAtPath: path) {
-            let dateStr = dateFormatter.string(from: Date())
-            var writeText = "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\n"
+            var writeText = getWriteTextBasedOnType(type, text: text, isDelimiter: true)
             fileHandle.seekToEndOfFile()
-            fileHandle.write(writeText.data(using: String.Encoding.utf8)!)
+            fileHandle.write(writeText.data(using: logEncodingType)!)
             fileHandle.closeFile()
-            writeText = "[\(logTypeName(type, isEmojis: true)) \(dateStr)]: \(text)"
-            printLog(type, text:writeText)
+            writeText = getWriteTextBasedOnType(type, text: text, isDelimiter: false)
+            #if os(iOS)
+                print(writeText)
+            #elseif os(OSX)
+                printLog(type, text:writeText)
+            #else
+                printLog(type, text:writeText)
+            #endif
             cleanup()
         }
         self.increaseLogCount(type);
@@ -557,6 +634,28 @@ open class Loggly {
     ///gets the log name
     func logName(_ num :Int) -> String {
         return "\(name)-\(num).log"
+    }
+    
+    ///get the default log directory
+    class func defaultReportDirectory() -> String {
+        var path = ""
+        let fileManager = FileManager.default
+        #if os(iOS)
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            path = "\(paths[0])/Report"
+        #elseif os(OSX)
+            let urls = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)
+            if let url = urls.last?.path {
+                path = "\(url)/Report"
+            }
+        #endif
+        if !fileManager.fileExists(atPath: path) && path != ""  {
+            do {
+                try fileManager.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
+            } catch _ {
+            }
+        }
+        return path
     }
     
     ///get the default log directory

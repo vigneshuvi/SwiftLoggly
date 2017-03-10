@@ -13,9 +13,12 @@
 		0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B411B2C1E55C13400ADEE0F /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B411B2B1E55C13400ADEE0F /* Loggly.swift */; };
 		0B411B2D1E55C13400ADEE0F /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B411B2B1E55C13400ADEE0F /* Loggly.swift */; };
-		0B6915701E4DB54B007C9394 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; };
+		0B6915701E4DB54B007C9394 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
+		0BAD998F1E7298530092A385 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B411B2B1E55C13400ADEE0F /* Loggly.swift */; };
+		0BAD99901E7298530092A385 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B411B2B1E55C13400ADEE0F /* Loggly.swift */; };
+		0BAD99911E7298650092A385 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -353,6 +356,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B3B6C901E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift in Sources */,
+				0BAD99901E7298530092A385 /* Loggly.swift in Sources */,
+				0BAD99911E7298650092A385 /* SwiftLogglyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */,
+				0BAD998F1E7298530092A385 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
