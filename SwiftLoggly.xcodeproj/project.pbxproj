@@ -14,8 +14,8 @@
 		0B6915701E4DB54B007C9394 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
-		0BABD9EF1E925B6300046FC0 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BABD9EE1E925B6300046FC0 /* Loggly.swift */; };
-		0BABD9F01E925B6300046FC0 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BABD9EE1E925B6300046FC0 /* Loggly.swift */; };
+		0BABD9F61E925FE500046FC0 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BABD9F51E925FE500046FC0 /* Loggly.swift */; };
+		0BABD9F71E925FE500046FC0 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BABD9F51E925FE500046FC0 /* Loggly.swift */; };
 		0BAD99911E7298650092A385 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,7 @@
 		0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyTests.swift; sourceTree = "<group>"; };
 		0B6915791E4DB71F007C9394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0BABD9EE1E925B6300046FC0 /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggly.swift; sourceTree = "<group>"; };
+		0BABD9F51E925FE500046FC0 /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Loggly.swift; path = SwiftLoggly/Loggly.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +139,7 @@
 		0B411B2A1E55C13400ADEE0F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0BABD9EE1E925B6300046FC0 /* Loggly.swift */,
+				0BABD9F51E925FE500046FC0 /* Loggly.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -338,7 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BABD9EF1E925B6300046FC0 /* Loggly.swift in Sources */,
+				0BABD9F61E925FE500046FC0 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BABD9F01E925B6300046FC0 /* Loggly.swift in Sources */,
+				0BABD9F71E925FE500046FC0 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
