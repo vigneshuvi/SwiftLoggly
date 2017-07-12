@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftLoggly"
-  s.version      = "1.0.4"
-  s.summary      = "Simple way to logging with rich feature framework in Swift."
+  s.version      = "1.0.5"
+  s.summary      = "Simple way to logging with rich feature framework and written in Swift 3."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?

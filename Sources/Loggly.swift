@@ -8,97 +8,8 @@
 
 import Foundation
 
-
-//MARK: -  Extension for String to find length
-extension String {
-    var length: Int {
-        return self.characters.count
-    }
-}
-
-//MARK: -  Extension for convert Dictionary to String
-extension Dictionary {
-    var jsonString: String {
-        let invalidJson = "Not a valid JSON"
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-            return  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
-        } catch {
-            return invalidJson
-        }
-    }
-    
-    func printJson() {
-        print(jsonString)
-    }
-}
-
-
-//MARK: -  Extension for convert NSDictionary to String
-extension NSDictionary {
-    var jsonString: String {
-        let invalidJson = "Not a valid JSON"
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
-            return  String(bytes: jsonData, encoding: String.Encoding.utf8) ?? invalidJson
-        } catch {
-            return invalidJson
-        }
-    }
-    
-    func printJson() {
-        print(jsonString)
-    }
-}
-
-//MARK: -  Struct for Color Log
-struct ColorLog {
-    
-    static let ESCAPE = "\u{001B}["
-    
-    static let RESET_FG = ESCAPE + "fg;" // Clear any foreground color
-    static let RESET_BG = ESCAPE + "bg;" // Clear any background color
-    static let RESET = ESCAPE + "0m"   // Clear any foreground or background color
-    
-    static func red<T>(object: T) {
-        print("\(ESCAPE)31m\(object)\(RESET)")
-    }
-    
-    static func green<T>(object: T) {
-        print("\(ESCAPE)32m\(object)\(RESET)")
-    }
-    
-    static func blue<T>(object: T) {
-        print("\(ESCAPE)34m\(object)\(RESET)")
-    }
-    
-    static func yellow<T>(object: T) {
-        print("\(ESCAPE)33m\(object)\(RESET)")
-    }
-    
-    static func purple<T>(object: T) {
-        print("\(ESCAPE)35m\(object)\(RESET)")
-    }
-    
-}
-
-//MARK: -  Enumaration for log type
-public enum LogType {
-    case Info
-    case Verbose
-    case Warnings
-    case Debug
-    case Error
-}
-
-//MARK: -  Enumaration for log type
-public enum LogFormatType {
-    case Normal
-    case JSON
-}
-
 //MARK: -  Loggly Class
-open class Loggly {
+@objc open class Loggly:NSObject {
     
     //MARK: -  Log Report Properties
     
@@ -138,17 +49,17 @@ open class Loggly {
     open var maxFileCount = 4;
     
     ///The directory in which the log files will be written
-    open var directory = Loggly.defaultDirectory();
+    open var directory = UviUtils.defaultDirectory();
     
     ///The reportDirectory in which the report files will be written
-    var reportDirectory = Loggly.defaultReportDirectory();
+    var reportDirectory = UviUtils.defaultReportDirectory();
     
     //The name of the log files.
     open var name = "logglyfile";
     
     //The date format of the log time.
     open var logDateFormat = "";
-
+    
     
     ///logging singleton
     open class var logger: Loggly {
@@ -184,7 +95,7 @@ open class Loggly {
     }
     
     func loadLogDetails() {
-        let path = "\(reportDirectory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(self.getReportFileName())"
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             let logDict:NSMutableDictionary = self.readReports();
@@ -317,7 +228,7 @@ open class Loggly {
     
     ///write content to the current csv file.
     open func getReportsFilePath() -> String{
-        let path = "\(reportDirectory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(self.getReportFileName())"
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: path) {
             return path;
@@ -327,7 +238,7 @@ open class Loggly {
     
     func createCSVReport(_ values: NSArray) -> String {
         if logReportFields.count > 0 && values.count > 0 {
-            let path = "\(reportDirectory)/\(getReportFileName())"
+            let path = "\(reportDirectory)/\(self.getReportFileName())"
             let fileManager = FileManager.default
             if !fileManager.fileExists(atPath: path) {
                 do {
@@ -355,7 +266,7 @@ open class Loggly {
     
     ///write content to the current csv file.
     open func writeReports(text: String) {
-        let path = "\(reportDirectory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(self.getReportFileName())"
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: path) {
             do {
@@ -372,7 +283,7 @@ open class Loggly {
     }
     
     open func readReports() -> NSMutableDictionary {
-        let path = "\(reportDirectory)/\(getReportFileName())"
+        let path = "\(reportDirectory)/\(self.getReportFileName())"
         return self.readFromPath(filePath:path);
     }
     
@@ -450,11 +361,11 @@ open class Loggly {
     
     ///do the checks and cleanup
     open func cleanupReports() {
-        let path = "\(reportDirectory)/\(getReportFileName())"
-        let size = fileSize(path)
+        let path = "\(reportDirectory)/\(self.getReportFileName())"
+        let size = UviUtils.fileSize(path)
         if size > 0 {
             //delete the oldest file
-            let deletePath = "\(directory)/\(getReportFileName())"
+            let deletePath = "\(directory)/\(self.getReportFileName())"
             let fileManager = FileManager.default
             do {
                 try fileManager.removeItem(atPath: deletePath)
@@ -477,92 +388,23 @@ open class Loggly {
         return formatter
     }
     
-    ///gets the log type with String
-    // use colored Emojis for better visual distinction
-    // of log level for Xcode 8
-    func logTypeName(_ type: LogType, isEmojis:Bool) -> String {
-        var logTypeStr = "";
-        switch type {
-        case .Info:
-            logTypeStr = isEmojis ? "💙 Info - " : "Info - ";
-            break;
-        case .Verbose:
-            logTypeStr = isEmojis ? "💜 Verbose - " : "Verbose - ";
-            break;
-        case .Warnings:
-            logTypeStr = isEmojis ? "💛 Warnings - " : "Warnings - ";
-            break;
-        case .Debug:
-            logTypeStr = isEmojis ? "💚 Debug - " : "Debug - ";
-            break;
-        case .Error:
-            logTypeStr = isEmojis ? "❤️ Error - " : "Error - ";
-            break;
-        }
-        
-        return logTypeStr;
-    }
-    
-    // Gets the log type with String
-    func logJSONTypeName(_ type: LogType) -> String {
-        var logTypeStr = "";
-        switch type {
-        case .Info:
-            logTypeStr =  "Info"
-            break;
-        case .Verbose:
-            logTypeStr = "Verbose" ;
-            break;
-        case .Warnings:
-            logTypeStr = "Warnings" ;
-            break;
-        case .Debug:
-            logTypeStr = "Debug"  ;
-            break;
-        case .Error:
-            logTypeStr = "Error";
-            break;
-        }
-        return logTypeStr;
-    }
-    
-    /// Prints the log type with String and type color code.
-    func printLog(_ type: LogType, text:String) {
-        switch type {
-        case .Info:
-            ColorLog.blue(object: text)
-            break;
-        case .Verbose:
-            ColorLog.purple(object: text)
-            break;
-        case .Warnings:
-            ColorLog.yellow(object: text)
-            break;
-        case .Debug:
-            ColorLog.green(object: text)
-            break;
-        case .Error:
-            ColorLog.red(object: text)
-            break;
-        }
-    }
     
     // Generate log text base on Log Format type.
     func getWriteTextBasedOnType(_ type: LogType, text: String, isDelimiter: Bool) -> String {
         let dateStr = dateFormatter.string(from: Date())
         if(logFormatType == LogFormatType.JSON) {
             let logJson = NSMutableDictionary();
-            logJson.setValue(logJSONTypeName(type), forKey: "LogType")
+            logJson.setValue(UviUtils.logJSONTypeName(type), forKey: "LogType")
             logJson.setValue(dateStr, forKey: "LogDate")
             logJson.setValue(text, forKey: "LogMessage")
             return "\(logJson.jsonString.replacingOccurrences(of: "\n", with: ""))\(isDelimiter ?"\n":"")"
         }
-        return "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
+        return "[\(UviUtils.logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
     }
     
     ///write content to the current log file.
     open func write(_ type: LogType, text: String) {
-        let path = "\(directory)/\(logName(0))"
+        let path = "\(directory)/\(UviUtils.logName(name, prefix: 0)))"
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: path) {
             do {
@@ -590,13 +432,13 @@ open class Loggly {
     
     ///do the checks and cleanup
     func cleanup() {
-        let path = "\(directory)/\(logName(0))"
-        let size = fileSize(path)
+        let path = "\(directory)/\(UviUtils.logName(name, prefix: 0))"
+        let size = UviUtils.fileSize(path)
         let maxSize: UInt64 = maxFileSize*1024
         if size > 0 && size >= maxSize && maxSize > 0 && maxFileCount > 0 {
             rename(0)
             //delete the oldest file
-            let deletePath = "\(directory)/\(logName(maxFileCount))"
+            let deletePath = "\(directory)/\(UviUtils.logName(name, prefix:maxFileCount) )"
             let fileManager = FileManager.default
             do {
                 try fileManager.removeItem(atPath: deletePath)
@@ -605,23 +447,13 @@ open class Loggly {
         }
     }
     
-    ///check the size of a file
-    func fileSize(_ path: String) -> UInt64 {
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: path) {
-            let attrs: NSDictionary? = try! fileManager.attributesOfItem(atPath: path) as NSDictionary?
-            if let dict = attrs {
-                return dict.fileSize()
-            }
-        }
-        return 0
-    }
+    
     
     ///Recursive method call to rename log files
     func rename(_ index: Int) {
         let fileManager = FileManager.default
-        let path = "\(directory)/\(logName(index))"
-        let newPath = "\(directory)/\(logName(index+1))"
+        let path = "\(directory)/\(UviUtils.logName(name, prefix: index)))"
+        let newPath = "\(directory)/\(UviUtils.logName(name, prefix: index+1))"
         if fileManager.fileExists(atPath: newPath) {
             rename(index+1)
         }
@@ -631,179 +463,103 @@ open class Loggly {
         }
     }
     
-    ///gets the log name
-    func logName(_ num :Int) -> String {
-        return "\(name)-\(num).log"
+    //MARK: -  Loggly Util Methods
+    
+    ///a free function to make writing to the log with Log type
+    open func getLogglyReportsOutput() -> NSDictionary {
+        return Loggly.logger.getReportsOutput()
     }
     
-    ///get the default log directory
-    class func defaultReportDirectory() -> String {
-        var path = ""
-        let fileManager = FileManager.default
-        #if os(iOS)
-            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            path = "\(paths[0])/Report"
-        #elseif os(OSX)
-            let urls = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)
-            if let url = urls.last?.path {
-                path = "\(url)/Report"
-            }
-        #endif
-        if !fileManager.fileExists(atPath: path) && path != ""  {
-            do {
-                try fileManager.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
-            } catch _ {
-            }
-        }
-        return path
+    // Before logging details it return empty path. Once logging is done. Method return exact report path
+    open func getLogglyReportCSVfilPath() -> String {
+        return Loggly.logger.getReportsFilePath()
     }
     
-    ///get the default log directory
-    class func defaultDirectory() -> String {
-        var path = ""
-        let fileManager = FileManager.default
-        #if os(iOS)
-            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-            path = "\(paths[0])/Logs"
-        #elseif os(OSX)
-            let urls = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)
-            if let url = urls.last?.path {
-                path = "\(url)/Logs"
-            }
-        #endif
-        if !fileManager.fileExists(atPath: path) && path != ""  {
-            do {
-                try fileManager.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
-            } catch _ {
-            }
-        }
-        return path
+    // Get the Loggly Info Count
+    open func getLogCountBasedonType(_ type: LogType) -> NSInteger{
+        return Loggly.logger.getCountBasedonLogType(type);
     }
     
-}
+    //MARK: -  Loggly Info Methods
+    
+    ///a free function to make writing to the log
+    open func logglyInfo(text: String) {
+        Loggly.logger.write(LogType.Info, text: text)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func logglyInfo(dictionary: NSDictionary) {
+        Loggly.logger.write(LogType.Info, text: dictionary.jsonString)
+    }
+    
+    //MARK: -  Loggly Warning Methods
+    ///a free function to make writing to the log
+    open func logglyWarnings(text: String) {
+        Loggly.logger.write(LogType.Warnings, text: text)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func logglyWarnings(dictionary: NSDictionary) {
+        Loggly.logger.write(LogType.Warnings, text: dictionary.jsonString)
+    }
+    
+    //MARK: -  Loggly Verbose Methods
+    ///a free function to make writing to the log
+    open func logglyVerbose(text: String) {
+        Loggly.logger.write(LogType.Debug, text: text)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func logglyVerbose(dictionary: NSDictionary) {
+        Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
+    }
+    
+    //MARK: -  Loggly Debug Methods
+    ///a free function to make writing to the log
+    open func logglyDebug(text: String) {
+        Loggly.logger.write(LogType.Debug, text: text)
+    }
+    
+    
+    ///a free function to make writing to the log with Log type
+    open func logglyDebug(dictionary: NSDictionary) {
+        Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
+    }
+    
+    //MARK: -  Loggly Error Methods
+    ///a free function to make writing to the log
+    open func logglyError(text: String) {
+        Loggly.logger.write(LogType.Error, text: text)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func logglyError(dictionary: NSDictionary) {
+        Loggly.logger.write(LogType.Error, text: dictionary.jsonString)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func logglyError(_ error: NSError) {
+        Loggly.logger.write(LogType.Error, text: error.localizedDescription)
+    }
+    
+    
+    //MARK: -  Loggly Methods with Log type
+    
+    ///a free function to make writing to the log with Log type
+    open func loggly(_ type: LogType, text: String) {
+        Loggly.logger.write(type, text: text)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
+        Loggly.logger.write(type, text: dictionary.jsonString)
+    }
+    
+    ///a free function to make writing to the log with Log type
+    open func loggly(_ type: LogType, dictionary: NSDictionary) {
+        Loggly.logger.write(type, text: dictionary.jsonString)
+    }
+    
 
-//MARK: -  Loggly Util Methods
-
-///a free function to make writing to the log with Log type
-public func getLogglyReportsOutput() -> NSDictionary {
-    return Loggly.logger.getReportsOutput()
-}
-
-// Before logging details it return empty path. Once logging is done. Method return exact report path
-public func getLogglyReportCSVfilPath() -> String {
-    return Loggly.logger.getReportsFilePath()
-}
-
-// Get the Loggly Info Count
-public func getLogCountBasedonType(_ type: LogType) -> NSInteger{
-    return Loggly.logger.getCountBasedonLogType(type);
-}
-
-//MARK: -  Loggly Info Methods
-
-///a free function to make writing to the log
-public func logglyInfo(text: String) {
-    Loggly.logger.write(LogType.Info, text: text)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyInfo(_ dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(LogType.Info, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyInfo(_  dictionary: NSDictionary) {
-    Loggly.logger.write(LogType.Info, text: dictionary.jsonString)
-}
-
-//MARK: -  Loggly Warning Methods
-///a free function to make writing to the log
-public func logglyWarnings(text: String) {
-    Loggly.logger.write(LogType.Warnings, text: text)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyWarnings(_ dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(LogType.Warnings, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyWarnings(_  dictionary: NSDictionary) {
-    Loggly.logger.write(LogType.Warnings, text: dictionary.jsonString)
-}
-
-//MARK: -  Loggly Verbose Methods
-///a free function to make writing to the log
-public func logglyVerbose(text: String) {
-    Loggly.logger.write(LogType.Debug, text: text)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyVerbose(_ dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyVerbose(_  dictionary: NSDictionary) {
-    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
-}
-
-//MARK: -  Loggly Debug Methods
-///a free function to make writing to the log
-public func logglyDebug(text: String) {
-    Loggly.logger.write(LogType.Debug, text: text)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyDebug(_ dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyDebug(_  dictionary: NSDictionary) {
-    Loggly.logger.write(LogType.Debug, text: dictionary.jsonString)
-}
-
-//MARK: -  Loggly Error Methods
-///a free function to make writing to the log
-public func logglyError(text: String) {
-    Loggly.logger.write(LogType.Error, text: text)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyError(_ dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(LogType.Error, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyError(_  dictionary: NSDictionary) {
-    Loggly.logger.write(LogType.Error, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyError(_  error: NSError) {
-    Loggly.logger.write(LogType.Error, text: error.localizedDescription)
-}
-
-///a free function to make writing to the log with Log type
-public func logglyError(_  error: Error) {
-    Loggly.logger.write(LogType.Error, text: error.localizedDescription)
-}
-
-
-//MARK: -  Loggly Methods with Log type
-
-///a free function to make writing to the log with Log type
-public func loggly(_ type: LogType, text: String) {
-    Loggly.logger.write(type, text: text)
-}
-
-///a free function to make writing to the log with Log type
-public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
-    Loggly.logger.write(type, text: dictionary.jsonString)
-}
-
-///a free function to make writing to the log with Log type
-public func loggly(_ type: LogType, dictionary: NSDictionary) {
-    Loggly.logger.write(type, text: dictionary.jsonString)
+    
 }

@@ -11,8 +11,10 @@
 		0B3B6C8B1E3F8B48003AE9C4 /* SwiftLogglyOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */; };
 		0B3B6C901E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */; };
 		0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B61786C1ECF2F0600BCE646 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B61786B1ECF2F0600BCE646 /* Loggly.swift */; };
-		0B61786D1ECF301300BCE646 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B61786B1ECF2F0600BCE646 /* Loggly.swift */; };
+		0B6178701ECF3EAC00BCE646 /* UviUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */; };
+		0B6178711ECF3EAC00BCE646 /* UviUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */; };
+		0B6178731ECF424C00BCE646 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6178721ECF424C00BCE646 /* Loggly.swift */; };
+		0B6178741ECF424C00BCE646 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6178721ECF424C00BCE646 /* Loggly.swift */; };
 		0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
 /* End PBXBuildFile section */
@@ -44,7 +46,8 @@
 		0B3B6C8A1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyOSXTests.swift; sourceTree = "<group>"; };
 		0B3B6C911E3F8B48003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B61786B1ECF2F0600BCE646 /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggly.swift; sourceTree = "<group>"; };
+		0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UviUtils.swift; path = SwiftLoggly/Sources/UviUtils.swift; sourceTree = SOURCE_ROOT; };
+		0B6178721ECF424C00BCE646 /* Loggly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loggly.swift; sourceTree = "<group>"; };
 		0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyTests.swift; sourceTree = "<group>"; };
 		0B6915791E4DB71F007C9394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -137,7 +140,8 @@
 		0B411B2A1E55C13400ADEE0F /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0B61786B1ECF2F0600BCE646 /* Loggly.swift */,
+				0B6178721ECF424C00BCE646 /* Loggly.swift */,
+				0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -252,7 +256,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = vigneshuvi;
 				TargetAttributes = {
 					0B3B6BFC1E3F6221003AE9C4 = {
@@ -333,7 +337,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B61786C1ECF2F0600BCE646 /* Loggly.swift in Sources */,
+				0B6178701ECF3EAC00BCE646 /* UviUtils.swift in Sources */,
+				0B6178731ECF424C00BCE646 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +346,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B61786D1ECF301300BCE646 /* Loggly.swift in Sources */,
+				0B6178711ECF3EAC00BCE646 /* UviUtils.swift in Sources */,
+				0B6178741ECF424C00BCE646 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +401,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -450,6 +457,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
