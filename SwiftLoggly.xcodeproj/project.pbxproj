@@ -11,12 +11,11 @@
 		0B3B6C8B1E3F8B48003AE9C4 /* SwiftLogglyOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6C821E3F8B47003AE9C4 /* SwiftLogglyOSX.framework */; };
 		0B3B6C901E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */; };
 		0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C841E3F8B47003AE9C4 /* SwiftLogglyOSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B6178701ECF3EAC00BCE646 /* UviUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */; };
-		0B6178711ECF3EAC00BCE646 /* UviUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */; };
-		0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
 		0B89112E1F165E25003749D6 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B89112D1F165E25003749D6 /* Loggly.swift */; };
 		0B89112F1F165E25003749D6 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B89112D1F165E25003749D6 /* Loggly.swift */; };
+		0B8911301F1661A5003749D6 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; };
+		0B8911331F166207003749D6 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +45,6 @@
 		0B3B6C8A1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B6C8F1E3F8B48003AE9C4 /* SwiftLogglyOSXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyOSXTests.swift; sourceTree = "<group>"; };
 		0B3B6C911E3F8B48003AE9C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UviUtils.swift; path = SwiftLoggly/Sources/UviUtils.swift; sourceTree = SOURCE_ROOT; };
 		0B6915751E4DB71F007C9394 /* SwiftLogglyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftLogglyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLogglyTests.swift; sourceTree = "<group>"; };
 		0B6915791E4DB71F007C9394 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				0B89112D1F165E25003749D6 /* Loggly.swift */,
-				0B61786F1ECF3EAC00BCE646 /* UviUtils.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -170,6 +167,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B8911301F1661A5003749D6 /* SwiftLoggly.h in Headers */,
 				0B3B6C921E3F8B48003AE9C4 /* SwiftLogglyOSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,7 +335,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B6178701ECF3EAC00BCE646 /* UviUtils.swift in Sources */,
 				0B89112E1F165E25003749D6 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +343,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B6178711ECF3EAC00BCE646 /* UviUtils.swift in Sources */,
 				0B89112F1F165E25003749D6 /* Loggly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B6915781E4DB71F007C9394 /* SwiftLogglyTests.swift in Sources */,
+				0B8911331F166207003749D6 /* SwiftLogglyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
