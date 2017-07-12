@@ -28,7 +28,11 @@ Simple way to logging with rich feature framework in Swift.
 First thing is to import the framework. See the Installation instructions on how to add the framework to your project.
 
 ```swift
-//iOS
+
+//iOS - Objective-C
+@import SwiftLoggly;
+
+//iOS-Swift
 import SwiftLoggly
 
 //macOS
@@ -56,6 +60,24 @@ public enum LogType {
 ## Example
 
 SwiftLoggly can be used right out of the box with no configuration, simply call the logging function.
+
+### Example 1 - Objective-C
+
+```swift
+
+// Log Dictionary
+NSMutableDictionary *user1 = [NSMutableDictionary new];
+[user1 setValue:@"vinoth" forKey:@"name" ];
+[user1 setValue:@"vignesh@gmail.com" forKey: @"email"];
+[[Loggly logger] logglyWarningsWithDictionary:user1];
+
+// Log string
+NSString *jsonString  = @"[{\"name\":\"vignesh\",\"email\":\"vigneshuvi@gmail.com\"},{\"name\":\"vinoth\",\"email\":\"vinoth@gmail.com\"}]";
+[[Loggly logger] logglyInfoWithText:jsonString];
+
+```
+
+### Example 2 - Swift
 
 ```swift
 
