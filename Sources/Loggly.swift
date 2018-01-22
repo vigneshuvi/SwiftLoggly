@@ -9,13 +9,6 @@
 import Foundation
 
 
-//MARK: -  Extension for String to find length
-extension String {
-    var length: Int {
-        return self.characters.count
-    }
-}
-
 //MARK: -  Extension for convert Dictionary to String
 extension Dictionary {
     var jsonString: String {
@@ -137,6 +130,9 @@ public enum LogFormatType {
     ///The max number of log file that will be stored. Once this point is reached, the oldest file is deleted.
     open var maxFileCount = 4;
     
+    open var enableEmojis = false;
+    
+    
     ///The directory in which the log files will be written
     open var directory = Loggly.defaultDirectory();
     
@@ -149,6 +145,17 @@ public enum LogFormatType {
     //The date format of the log time.
     open var logDateFormat = "";
     
+    // Help to enble Emojis
+    open var enableEmojis = false;
+    
+    
+    
+    // Log file extension
+    open var logFileExtension = ".log"
+    
+    func getExtension() -> String {
+        return logFileExtension.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).length > 0 ? logFileExtension : ".log"
+    }
     
     ///logging singleton
     open class var logger: Loggly {
@@ -391,7 +398,7 @@ public enum LogFormatType {
                 let csvText = try String(contentsOf: localPathURL, encoding: String.Encoding.utf8);
                 
                 // Check the csv count
-                if csvText.characters.count > 0 {
+                if csvText.count > 0 {
                     
                     // Split based on Newline delimiter
                     let csvArray = self.splitUsingDelimiter(csvText, separatedBy: "\n") as NSArray
@@ -442,7 +449,7 @@ public enum LogFormatType {
     }
     
     func splitUsingDelimiter(_ string: String, separatedBy: String) -> NSArray {
-        if string.characters.count > 0 {
+        if string.count > 0 {
             return string.components(separatedBy: separatedBy) as NSArray;
         }
         return [];
@@ -468,7 +475,7 @@ public enum LogFormatType {
     //the date formatter
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        if !logDateFormat.isEmpty && logDateFormat.length > 0 {
+        if !logDateFormat.isEmpty && logDateFormat.count > 0 {
             formatter.dateFormat = logDateFormat
         } else {
             formatter.timeStyle = .medium
@@ -557,7 +564,7 @@ public enum LogFormatType {
             logJson.setValue(text, forKey: "LogMessage")
             return "\(logJson.jsonString.replacingOccurrences(of: "\n", with: ""))\(isDelimiter ?"\n":"")"
         }
-        return "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
+        return "[\(logTypeName(type, isEmojis: enableEmojis)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
     }
     
     ///write content to the current log file.
@@ -633,7 +640,7 @@ public enum LogFormatType {
     
     ///gets the log name
     func logName(_ num :Int) -> String {
-        return "\(name)-\(num).log"
+        return "\(name)-\(num)\(getExtension())"
     }
     
     ///get the default log directory
@@ -908,3 +915,4 @@ public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
 public func loggly(_ type: LogType, dictionary: NSDictionary) {
     Loggly.logger.write(type, text: dictionary.jsonString)
 }
+
