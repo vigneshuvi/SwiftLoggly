@@ -137,6 +137,9 @@ public enum LogFormatType {
     ///The max number of log file that will be stored. Once this point is reached, the oldest file is deleted.
     open var maxFileCount = 4;
     
+    open var enableEmojis = false;
+    
+    
     ///The directory in which the log files will be written
     open var directory = Loggly.defaultDirectory();
     
@@ -557,7 +560,7 @@ public enum LogFormatType {
             logJson.setValue(text, forKey: "LogMessage")
             return "\(logJson.jsonString.replacingOccurrences(of: "\n", with: ""))\(isDelimiter ?"\n":"")"
         }
-        return "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
+        return "[\(logTypeName(type, isEmojis: enableEmojis)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
     }
     
     ///write content to the current log file.
@@ -908,3 +911,4 @@ public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
 public func loggly(_ type: LogType, dictionary: NSDictionary) {
     Loggly.logger.write(type, text: dictionary.jsonString)
 }
+

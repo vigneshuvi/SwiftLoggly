@@ -39,15 +39,23 @@ class SwiftLogglyTests: XCTestCase {
         loggly(LogType.Debug, text: "is")
         loggly(LogType.Warnings, text: "Matter")
         loggly(LogType.Error, text: "here!!")
+        
         print(getLogglyReportsOutput());
+        
         loggly(LogType.Debug, text: "is")
         loggly(LogType.Warnings, text: "Matter")
         loggly(LogType.Error, text: "here!!")
+        
         print(getLogCountBasedonType(LogType.Warnings));
+        
         let dict:NSMutableDictionary = NSMutableDictionary();
         dict.setValue("Vignesh", forKey: "name") ;
         dict.setValue("Senior Engineer",forKey: "Position");
+        
+    
         loggly(LogType.Info, dictionary: dict)
+        
+        
 
     }
     

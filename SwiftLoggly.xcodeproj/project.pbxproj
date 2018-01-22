@@ -14,7 +14,7 @@
 		0B69157A1E4DB71F007C9394 /* SwiftLoggly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B6BFD1E3F6221003AE9C4 /* SwiftLoggly.framework */; };
 		0B89112E1F165E25003749D6 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B89112D1F165E25003749D6 /* Loggly.swift */; };
 		0B89112F1F165E25003749D6 /* Loggly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B89112D1F165E25003749D6 /* Loggly.swift */; };
-		0B8911301F1661A5003749D6 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; };
+		0B8911301F1661A5003749D6 /* SwiftLoggly.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3B6C001E3F6221003AE9C4 /* SwiftLoggly.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B8911331F166207003749D6 /* SwiftLogglyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6915771E4DB71F007C9394 /* SwiftLogglyTests.swift */; };
 /* End PBXBuildFile section */
 
