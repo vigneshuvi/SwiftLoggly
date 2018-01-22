@@ -152,6 +152,17 @@ public enum LogFormatType {
     //The date format of the log time.
     open var logDateFormat = "";
     
+    // Help to enble Emojis
+    open var enableEmojis = false;
+    
+    
+    
+    // Log file extension
+    open var logFileExtension = ".log"
+    
+    func getExtension() -> String {
+        return logFileExtension.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).length > 0 ? logFileExtension : ".log"
+    }
     
     ///logging singleton
     open class var logger: Loggly {
@@ -636,7 +647,7 @@ public enum LogFormatType {
     
     ///gets the log name
     func logName(_ num :Int) -> String {
-        return "\(name)-\(num).log"
+        return "\(name)-\(num)\(getExtension())"
     }
     
     ///get the default log directory
