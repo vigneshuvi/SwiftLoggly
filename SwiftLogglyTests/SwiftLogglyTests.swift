@@ -24,7 +24,8 @@ class SwiftLogglyTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        Loggly.logger.logFormatType = LogFormatType.JSON
+        Loggly.logger.enableEmojis = true
+        Loggly.logger.logFormatType = LogFormatType.Normal
         
         Loggly.logger.logEncodingType = String.Encoding.utf8;
     
@@ -39,15 +40,23 @@ class SwiftLogglyTests: XCTestCase {
         loggly(LogType.Debug, text: "is")
         loggly(LogType.Warnings, text: "Matter")
         loggly(LogType.Error, text: "here!!")
+        
         print(getLogglyReportsOutput());
+        
         loggly(LogType.Debug, text: "is")
         loggly(LogType.Warnings, text: "Matter")
         loggly(LogType.Error, text: "here!!")
+        
         print(getLogCountBasedonType(LogType.Warnings));
+        
         let dict:NSMutableDictionary = NSMutableDictionary();
         dict.setValue("Vignesh", forKey: "name") ;
         dict.setValue("Senior Engineer",forKey: "Position");
+        
+    
         loggly(LogType.Info, dictionary: dict)
+        
+        
 
     }
     

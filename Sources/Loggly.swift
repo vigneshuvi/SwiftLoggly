@@ -14,6 +14,9 @@ extension String {
     var length: Int {
         return self.characters.count
     }
+    func trim() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
 }
 
 //MARK: -  Extension for convert Dictionary to String
@@ -149,6 +152,16 @@ public enum LogFormatType {
     //The date format of the log time.
     open var logDateFormat = "";
     
+    // Help to enble Emojis
+    open var enableEmojis = false;
+    
+    
+    // Log file extension
+    open var logFileExtension = ".log"
+    
+    func getExtension() -> String {
+        return logFileExtension.trim().length > 0 ? logFileExtension : ".log"
+    }
     
     ///logging singleton
     open class var logger: Loggly {
@@ -557,7 +570,7 @@ public enum LogFormatType {
             logJson.setValue(text, forKey: "LogMessage")
             return "\(logJson.jsonString.replacingOccurrences(of: "\n", with: ""))\(isDelimiter ?"\n":"")"
         }
-        return "[\(logTypeName(type, isEmojis: false)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
+        return "[\(logTypeName(type, isEmojis: enableEmojis)) \(dateStr)]: \(text)\(isDelimiter ?"\n":"")"
     }
     
     ///write content to the current log file.
@@ -567,7 +580,8 @@ public enum LogFormatType {
         if !fileManager.fileExists(atPath: path) {
             do {
                 try "".write(toFile: path, atomically: true, encoding: logEncodingType)
-            } catch _ {
+            } catch  {
+                print("error getting wriet string: \(error)")
             }
         }
         if let fileHandle = FileHandle(forWritingAtPath: path) {
@@ -633,7 +647,7 @@ public enum LogFormatType {
     
     ///gets the log name
     func logName(_ num :Int) -> String {
-        return "\(name)-\(num).log"
+        return "\(name)-\(num)\(getExtension())"
     }
     
     ///get the default log directory
@@ -908,3 +922,4 @@ public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
 public func loggly(_ type: LogType, dictionary: NSDictionary) {
     Loggly.logger.write(type, text: dictionary.jsonString)
 }
+

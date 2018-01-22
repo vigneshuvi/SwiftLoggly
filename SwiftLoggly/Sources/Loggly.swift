@@ -9,6 +9,16 @@
 import Foundation
 
 
+//MARK: -  Extension for String to find length
+extension String {
+    var length: Int {
+        return self.characters.count
+    }
+    func trim() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
+}
+
 //MARK: -  Extension for convert Dictionary to String
 extension Dictionary {
     var jsonString: String {
@@ -146,12 +156,11 @@ public enum LogFormatType {
     open var enableEmojis = false;
     
     
-    
     // Log file extension
     open var logFileExtension = ".log"
     
     func getExtension() -> String {
-        return logFileExtension.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).length > 0 ? logFileExtension : ".log"
+        return logFileExtension.trim().length > 0 ? logFileExtension : ".log"
     }
     
     ///logging singleton
@@ -395,7 +404,7 @@ public enum LogFormatType {
                 let csvText = try String(contentsOf: localPathURL, encoding: String.Encoding.utf8);
                 
                 // Check the csv count
-                if csvText.count > 0 {
+                if csvText.characters.count > 0 {
                     
                     // Split based on Newline delimiter
                     let csvArray = self.splitUsingDelimiter(csvText, separatedBy: "\n") as NSArray
@@ -446,7 +455,7 @@ public enum LogFormatType {
     }
     
     func splitUsingDelimiter(_ string: String, separatedBy: String) -> NSArray {
-        if string.count > 0 {
+        if string.characters.count > 0 {
             return string.components(separatedBy: separatedBy) as NSArray;
         }
         return [];
@@ -472,7 +481,7 @@ public enum LogFormatType {
     //the date formatter
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        if !logDateFormat.isEmpty && logDateFormat.count > 0 {
+        if !logDateFormat.isEmpty && logDateFormat.length > 0 {
             formatter.dateFormat = logDateFormat
         } else {
             formatter.timeStyle = .medium
@@ -571,7 +580,8 @@ public enum LogFormatType {
         if !fileManager.fileExists(atPath: path) {
             do {
                 try "".write(toFile: path, atomically: true, encoding: logEncodingType)
-            } catch _ {
+            } catch  {
+                print("error getting wriet string: \(error)")
             }
         }
         if let fileHandle = FileHandle(forWritingAtPath: path) {
@@ -912,3 +922,4 @@ public func loggly(_ type: LogType, dictionary: Dictionary<AnyHashable, Any>) {
 public func loggly(_ type: LogType, dictionary: NSDictionary) {
     Loggly.logger.write(type, text: dictionary.jsonString)
 }
+

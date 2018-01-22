@@ -128,8 +128,10 @@ OS X/Ubuntu log files will be created in the log directory (found under: /Librar
 There are a few configurable options in SwiftLoggly.
 
 ```swift
-//This writes to the log
-logglyInfo("Write to the log!")
+
+
+// Enable Emojis
+Loggly.logger.enableEmojis = false
 
 //Set the log save format type
 Loggly.logger.logFormateType = LogFormateType.JSON  //default is "Normal"
@@ -148,6 +150,11 @@ Loggly.logger.maxFileCount = 8 //default is 4
 
 //Set the directory in which the logs files will be written
 Loggly.logger.directory = "/Library/XXX-folder-name-XXX" //default is the standard logging directory for each platform.
+
+//This writes to the log
+logglyInfo("Write to the log!")
+
+
 
 ```
 
