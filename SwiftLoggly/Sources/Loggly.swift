@@ -9,13 +9,6 @@
 import Foundation
 
 
-//MARK: -  Extension for String to find length
-extension String {
-    var length: Int {
-        return self.characters.count
-    }
-}
-
 //MARK: -  Extension for convert Dictionary to String
 extension Dictionary {
     var jsonString: String {
@@ -405,7 +398,7 @@ public enum LogFormatType {
                 let csvText = try String(contentsOf: localPathURL, encoding: String.Encoding.utf8);
                 
                 // Check the csv count
-                if csvText.characters.count > 0 {
+                if csvText.count > 0 {
                     
                     // Split based on Newline delimiter
                     let csvArray = self.splitUsingDelimiter(csvText, separatedBy: "\n") as NSArray
@@ -456,7 +449,7 @@ public enum LogFormatType {
     }
     
     func splitUsingDelimiter(_ string: String, separatedBy: String) -> NSArray {
-        if string.characters.count > 0 {
+        if string.count > 0 {
             return string.components(separatedBy: separatedBy) as NSArray;
         }
         return [];
@@ -482,7 +475,7 @@ public enum LogFormatType {
     //the date formatter
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        if !logDateFormat.isEmpty && logDateFormat.length > 0 {
+        if !logDateFormat.isEmpty && logDateFormat.count > 0 {
             formatter.dateFormat = logDateFormat
         } else {
             formatter.timeStyle = .medium
