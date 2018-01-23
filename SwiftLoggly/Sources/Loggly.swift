@@ -143,8 +143,13 @@ public enum LogFormatType {
     ///The directory in which the log files will be written
     open var directory : String = Loggly.defaultDirectory() {
         didSet {
+            guard directory.count > 0 else {
+                print("Error changing logger directory. The value \(directory) is not valid. Using default value instead")
+                directory = Loggly.defaultDirectory()
+                return
+            }
             let fileManager = FileManager.default
-            if !fileManager.fileExists(atPath: directory) && directory != ""  {
+            if !fileManager.fileExists(atPath: directory)  {
                 do {
                     try fileManager.createDirectory(atPath: directory, withIntermediateDirectories: false, attributes: nil)
                 } catch _ {
