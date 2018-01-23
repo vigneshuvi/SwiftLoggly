@@ -141,7 +141,24 @@ public enum LogFormatType {
     open var maxFileCount = 4;
     
     ///The directory in which the log files will be written
-    open var directory = Loggly.defaultDirectory();
+    open var directory : String = Loggly.defaultDirectory() {
+        didSet {
+            guard directory.count > 0 else {
+                print("Error changing logger directory. The value \(directory) is not valid. Using default value instead")
+                directory = Loggly.defaultDirectory()
+                return
+            }
+            let fileManager = FileManager.default
+            if !fileManager.fileExists(atPath: directory)  {
+                do {
+                    try fileManager.createDirectory(atPath: directory, withIntermediateDirectories: false, attributes: nil)
+                } catch _ {
+                    print("Error changing logger directory. The value \(directory) is not valid. Using default value instead")
+                    directory = Loggly.defaultDirectory()
+                }
+            }
+        }
+    }
     
     ///The reportDirectory in which the report files will be written
     var reportDirectory = Loggly.defaultReportDirectory();

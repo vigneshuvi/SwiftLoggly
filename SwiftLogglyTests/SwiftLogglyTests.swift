@@ -24,6 +24,9 @@ class SwiftLogglyTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let logsDirectory = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("vignesh", isDirectory: true)
+        Loggly.logger.directory = logsDirectory.path
         Loggly.logger.enableEmojis = true
         Loggly.logger.logFormatType = LogFormatType.Normal
         
@@ -55,9 +58,6 @@ class SwiftLogglyTests: XCTestCase {
         
     
         loggly(LogType.Info, dictionary: dict)
-        
-        
-
     }
     
     func testPerformanceExample() {

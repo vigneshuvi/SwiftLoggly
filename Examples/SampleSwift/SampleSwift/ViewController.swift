@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view, typically from a nib.
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let logsDirectory = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("logs", isDirectory: true)
+        let logsDirectory = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("SampleSwift", isDirectory: true)
         Loggly.logger.directory = logsDirectory.path
         Loggly.logger.enableEmojis = true
         loggly(LogType.Info, text: "Welcome to Swift Loggly")
