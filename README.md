@@ -7,6 +7,7 @@ Simple way to logging with rich feature framework in Swift.
 
 ## Features
 
+- Support swift 5 and latest Xcode
 - Method can helps to log String, NSDictionary, Dictionary, NSError, Error.
 - Added the emojis for console log.
 - Added the rich function for log tracking type.(Info, Verbose, Warnings, Debug, Error)
