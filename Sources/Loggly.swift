@@ -12,7 +12,7 @@ import Foundation
 //MARK: -  Extension for String to find length
 extension String {
     var length: Int {
-        return self.characters.count
+        return self.count
     }
     func trim() -> String {
         return components(separatedBy: .whitespaces).joined()
@@ -421,7 +421,7 @@ public enum LogFormatType {
                 let csvText = try String(contentsOf: localPathURL, encoding: String.Encoding.utf8);
                 
                 // Check the csv count
-                if csvText.characters.count > 0 {
+                if csvText.count > 0 {
                     
                     // Split based on Newline delimiter
                     let csvArray = self.splitUsingDelimiter(csvText, separatedBy: "\n") as NSArray
@@ -472,7 +472,7 @@ public enum LogFormatType {
     }
     
     func splitUsingDelimiter(_ string: String, separatedBy: String) -> NSArray {
-        if string.characters.count > 0 {
+        if string.count > 0 {
             return string.components(separatedBy: separatedBy) as NSArray;
         }
         return [];

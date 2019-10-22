@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftLoggly"
-  s.version      = "1.0.7"
-  s.summary      = "Simple way to logging with rich feature framework and written in Swift 3."
+  s.version      = "1.1.0"
+  s.summary      = "Simple way to logging with rich feature framework and written in Swift 4, 4.2 and 5."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -68,6 +68,7 @@ Pod::Spec.new do |s|
   #  When using multiple platforms
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.9"
+  s.swift_version = '5.0'
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
 
